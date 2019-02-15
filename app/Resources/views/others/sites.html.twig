@@ -1,0 +1,3390 @@
+{% extends 'others/layout.html.twig' %}
+
+{% block content %}
+	<style>
+		ul, li{
+			text-align: justify;
+		}
+		p{
+			
+		}
+		#div_domaine_select{
+			margin-top: 40px; 
+			margin-right: 200px;
+			width: 35%; 
+			float: right; 
+			padding: 30px; 
+			border-radius: 50px;
+	   }
+	   #tab_qualif td{
+		   border: 1px rgb(40, 40, 0) solid;
+		   border-radius: 15px;
+	   }
+	   #tab_qualif{
+			border-collapse: separate;
+			border-spacing: 5px 8px;
+	   }
+	   .titrecol{
+		   font-weight: bold;
+		   text-align: center;
+		   background-color: rgb(201, 228, 134);
+	   }
+	   #tab_niv{
+	   }
+	   #div_graphs, #div_filtres {
+		   width: 95%;
+		   margin: auto;
+		   margin-bottom: 80px;
+	   }
+	   #div_filtres {
+		   margin-top: 50px;
+	   }
+	   #ch_annee{
+		   float: right;
+	   }
+	   .espace{
+		   height: 50px;
+		   width: 100%;
+	   }
+	   #titre_partie3, #titre_partie2{
+		   width: 95%; 
+		   margin: auto;  
+		   margin-top: 120px; 
+		   margin-bottom: 0px; 
+	   }
+	   .titre_partie{
+		   color: white;
+		   background-color: #005EB8;
+		   text-align: center;
+		   padding: 5px;
+		   border-radius: 10px;
+	   }
+	   .titre_partie_filtre{
+		   color: #005EB8;
+		   background-color: white;
+		   text-align: center;
+		   padding: 5px;
+		   border-radius: 10px;
+		   border: 1px #005EB8 solid; 
+	   }
+	   .niveau, .nPlusUn, .nPlusDeux, .nPlusTrois, .ecart, #col_niv, #col_n_plus_un, #col_n_plus_deux, #col_n_plus_trois, #col_ecart{
+		   text-align: center;
+	   }
+		.select-dropdown{
+			overflow-y: auto !important;
+		}
+		.nom_agent{
+			text-align: center;
+			margin-left: 1%;
+		}
+		th, td{
+			text-align: center;
+		}
+		. text_site{
+			font-weight: 501;
+		}
+	</style>
+	<div class="container" style="margin-bottom: 112px; ">
+		<h3 class="center-align">Conception et développement de sites web d'entreprises</h3>
+		<ul class="sites">
+			<h6 style="font-weight: 501; ">Les deux années où j'ai travaillé comme développeur PHP fullstack pour ENEDIS m'ont apportée la capacité
+			de développer des sites web de A à Z : </h6>
+			<li>Rédaction de cahier des charges en collaboration avec un chef de projet.</li>
+			<li>Choix des technologies utilisées (par exemple LAMP avec Symfony, Materialize, Chart.js...).</li>
+			<li>Configuration du serveur web (droits utilisateurs, fichiers de conf, redirections...) en partenariat avec les équipes réseau.</li>
+			<li>Installation du Framework Symfony (version 3.4.2.).</li>
+			<li>Installation du Bundle EasyAdminBundle pour le développement de la partie administration. </li>
+			<li>Développement du site entier - Backend et Frontend.</li>
+			<li>Sécurisation avec l'étude des types de données et la mise en place d'une redirection vers un serveur national dédié à la sécurité. </li>
+			<li>Développement des améliorations demandées par les utilisateurs.</li>
+		</ul>
+		<hr class="ligne_subtitle" />
+		<h5 class="center-align">CPA</h5>
+		<ul>
+			<p style="font-weight: 501; ">La base de Saintes constitue un nouveau service ENEDIS, la centralisation de la programmation des activités des 
+			agents de terrain. C'est pourquoi j'ai œuvé avec les chefs de projets à mettre en place les outils 
+			nécéssaires à leurs activités au travers d'un site portail, CPA  (Centralisation de la programmation des Agents) :</p>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une première partie du site, depuis un import journalier  de données (un robot Autoit que j'ai développé)
+				en provenance de la base nationale, représente dans des reporting l'avancement des chantiers.
+				Ces reporting sont filtrables selon des mailles géographiques et peuvent être exportés au format PDF
+				ou PowerPoint, permettent de visualiser le détails des données, lesquelles sont exportables au format Excel.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une seconde partie, depuis un import hebdomadaire
+				en provenance de la base nationale, représente dans des reporting le budget ENEDIS (CAPEX, OPEX) sur l'année en région Poitou-Charentes.
+				Ces reporting sont filtrables selon des mailles géographiques et temporelles et peuvent être exportés au format PDF
+				ou PowerPoint.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une troisième partie permet aux agents  d'historiser les appels concernant les pannes, 
+				des listes déroulantes et des auto-complétion accélèrent et fiabilisent la visualisation et la prise de données, les pannes de la journée
+				sont visibles dans un tableau, et une autre page du site présente l'historique complet des appels.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Le reste du site présente les informations administrables par les 
+				utilisateurs eux-mêmes avecun mot de passe, c'est à dire un trombinoscope et des procédures de travail.
+			</li>
+		</ul>
+		<hr class="ligne_fine" />
+		<h5 class="center-align">LOOP</h5>
+		<ul>
+			<p style="font-weight: 501; ">L'Outil de l'Organisation de la Prévention, les agents ENEDIS se « visitent » les uns les autres régulièrement dans le cadre de 
+			visites destinées à assurer la prévention des risques. LOOP est basé sur un import régulier des données en provenance de la base
+			nationale, afin de présenter des reportings sur la quantité et la qualité de ces visites.</p>
+			<li style="margin-top: 5px; "></li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une première partie du site, la partie quantitative, représente dans 
+				des reporting l'avancement des visites selon leur catégorie.
+				Ces reporting sont eux aussi filtrables et permettent une visualisation fine selon les catégories de visites,
+				la maille géographique et/ou la période choisie.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une seconde partie, la partie qualitative, représente dans des reporting 
+				le niveau qualitatif des visites, depuis la moyenne des visites sur la région, jusqu'à une visite elle-même 
+				avec les commentaires et appréciations qui lui sont associées.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Enfin, la page d'accueil du site montre un diaporama paramétrable 
+				avec un mot de passe, concernant les métiers de la prévention, et affiche un badeau informatif lui aussi 
+				modifiable avec un mot de passe.
+			</li>
+		</ul>
+		<hr class="ligne_fine" />
+		<h5 class="center-align">GPEC</h5>
+		<ul>
+			<p style="font-weight: 501; ">La Gestion Prévisionnelle des Emplois et des Compétences (G.P.E.C.) est une méthode employée par les grandes
+			entreprises pour planifier la gestion des ressources humaines. Dans le but d'adapter l'outil existant à la région Poitou-Charentes,
+			j'ai développé un site basé sur les données fournies par l'application nationale (import régulier avec un robot).</p>
+			<li style="margin-top: 5px; "></li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;La page principale du site présente la liste compléte des agents dans un tableau
+				materialize filtrable et triable (recherche), certains champs sont modifiables afin de laisser au managers utilisant le
+				site la possibilité d'ajouter des informations aux données importées. Chaque ligne du tableau correspond à un agent
+				dont les compétences sont notées en détail via une page accéssible en cliquant sur une icone.				
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;La fiche de l'agent est une page web où ses compétences sont détaillées. 
+				Des tableaux et des graphiques représentent sa notation par domaine et sous-domaines, et tableau résume 
+				les compétences métiers auxquelles l'agent peut prétendre selon son niveau.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une autre page du site fonctionne de la même manière, mais en établissant
+				la moyenne des niveaux atteints par les agents selon des filtres géographiques, tout en précisant le nombre
+				ayant acquis telle ou telle compétence. Nous saurons par exemple que la base de Saintes dispose de 4 agents possédant
+				le niveau requis pour effectuer des travaux de maintenance sur des lignes aériennes, mais qu'elle n'en aura plus que 3 d'ici 
+				2 ans.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Une autre partie du site affiche le nombre d'agents pouvant être formateur
+				dans un domaine ou un sous-domaine. Un clique sur un agent montre un tableau où sont indiquées
+				les compétences où il peut être formateur.
+			</li>
+			<li>
+				•&nbsp;&nbsp;&nbsp;&nbsp;Le site dispose enfin d'une partie administration réalisée avec le Bundle
+				EasyAdminBundle où il est possible de gérer l'ensemble des données depuis les agents et les bases opérationnelles
+				(comme Saintes pa exemple), jusqu'aux compétences et leur domaine et sous-domaine respectifs.
+				Nous avons ainsi un site dynamique et entièrement paramétrable.
+			</li>
+			<li style="text-align: center; margin-bottom: 27px; margin-top: 27px; ">
+				<a class="waves-effect waves-light btn modal-trigger" href="#modal_gpec">Exemple de site GPEC</a>
+			</li>
+		</ul>
+		<hr class="ligne_fine" />
+		<h5 class="center-align">Le R.G.P.D. et la sécurisation : GARDIAN</h5>
+		<ul>
+			<p style="font-weight: 501; ">Le Règlement Général sur la Protection des Données (R.G.P.D.) impose aux entreprises de 
+			qualifier et de documenter offciellement les types de données qu'elles manipulent dans le cadre de leurs activités, et
+			de mettre en place un niveau de sécurité selon le type et la sensibilité de ces données
+			(données à caractère commerciales, personnelles, ...).
+			Après avoir réalisé un document caractérisant les données de l'application, 
+			j'ai mis en place un module destiné à la sécurité, et basé sur l'interrogation d'un annuaire nationale, Gardian.
+			Celui-ci utilise le protocole openID afin de gérer et de sécuriser les échanges entre client et serveur.</p>
+			<li style="margin-top: 5px; "></li>
+			<li>
+				→&nbsp;&nbsp;&nbsp;&nbsp;J'ai ensuite reproduit ce processus pour les sites que j'avais déjà développés,
+				GPIL et LOOP.
+			</li>
+		</ul>
+	</div>
+	
+	
+	
+	
+	
+	<div id="modal_gpec" class="modal" style="width: 95%; ">
+		<div class="modal-content">
+			<h5 id='titre_popup_gpec' style="text-align: left; ">
+				GPEC - Cet exemple fonctionnel de page du site présente le nombre et le niveau moyen des agents sur la région.
+			</h5>
+			<div id="interface">
+				<div id="div_filtres">
+					<div class="input-field col s12">
+						<select id="selectPole" multiple>
+							<option value="" selected="selected">Tous</option>
+							{% for pole in poles %}
+								<option value="{{ pole.pole }}">{{ pole.pole }}</option>
+							{% endfor %}
+						</select>
+						<label>Filtre : Pôle
+						</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="selectBo" multiple>
+							<option value="" selected="selected">Toutes</option>
+							{% for bo in bos %}
+								<option value="{{ bo.nom }}" label="{{ bo.pole }}">{{ bo.nom }}</option>
+							{% endfor %}
+						</select>
+						<label>Filtre : BO
+						</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="selectProfil" multiple>
+							<option value="" selected="selected">Tous</option>
+							<option value="MPRO">MPRO</option>
+							<option value="TE">TE</option>
+							<option value="RIP">RIP</option>
+							<option value="CDC">CDC</option>
+							<option value="TIP">TIP</option>
+						</select>
+						<label>Filtre : Profil
+						</label>
+					</div>
+					<div class="input-field col s12">
+						<select id="selectAstreinte">
+							<option value="" selected="selected">Tous</option>
+							<option value="oui">oui</option>
+							<option value="non">non</option>
+						</select>
+						<label>Filtre : Astreinte
+						</label>
+					</div>
+					<div class="input-field col s12">
+						<select class="select_controle" multiple id="selectAgent">
+							
+						</select>
+						<label>Filtre : Agent
+						</label>
+					</div>
+					<div id="div_button_filtre" style="float: right; ">
+						<button id="button_filtre" class="btn">FILTRER</button>
+					</div>
+				</div>
+
+				<div id="div_form" style="padding: 0px; ">
+					<form id="ch_annee" action="#" style="float: right; padding: 5px; width: 100%; ">
+						<div id="row_ch_annee" class="row" style="width: 100%; float: right; ">
+							<div class="col s6"></div>
+							<div class="col s3">
+								<p>
+									<label style="float: right; ">
+										<span>Année de l'attendu cible pour calculer l'écart :</span>
+									</label>
+								</p>
+							</div>
+							<div class="col s1">
+								<p>
+									<label>
+										<input type="radio" id="choix_annee1" name="choix_annee" checked="checked" value="{{ 'now'|date_modify('+1 year')|date('Y') }}">
+										<span>
+											{{ 'now'|date_modify('+1 year')|date('Y') }}</span>
+									</label>
+								</p>
+							</div>
+							<div class="col s1">
+								<p>
+									<label>
+										<input type="radio" id="choix_annee2" name="choix_annee" value="{{ 'now'|date_modify('+2 year')|date('Y') }}">
+										<span>{{ 'now'|date_modify('+2 year')|date('Y') }}</span>
+									</label>
+								</p>
+							</div>
+							<div class="col s1">
+								<p>
+									<label>
+										<input type="radio" id="choix_annee3" name="choix_annee" value="{{ 'now'|date_modify('+3 year')|date('Y') }}">
+										<span>{{ 'now'|date_modify('+3 year')|date('Y') }}</span>
+									</label>
+								</p>
+							</div>
+						</div>
+					</form>
+					
+					<div style="padding: 51px; " id="main_div">
+						<table id="tab_niv">
+							<thead id="thead_tab_niv">
+								<tr id="trTitres" style="background-color: rgb(201, 228, 134); ">
+									<th id="col_dom">Domaine</th>
+									<th id="col_sdom">Sous Domaine</th>
+									<th id="col_nb_agents">Nombre d'agents</th>
+									<th id="col_niv">Niveau MMS</th>
+									<th id="col_n_plus_un">Attendu cible en {{ "now"|date_modify("+1 year")|date("Y") }}</th>
+									<th id="col_n_plus_deux">Attendu cible en {{ "now"|date_modify("+2 year")|date("Y") }}</th>
+									<th id="col_n_plus_trois">Attendu cible en {{ "now"|date_modify("+3 year")|date("Y") }}</th>
+									<th id="col_ecart">Ecart</th>
+									<th id="col_search">
+										<i class="material-icons">search</i>
+									</th>
+								</tr>
+							</thead>
+							<tbody id="body_tab_niv">
+								{% set k = 0 %}
+								{% for rs in rslt %}
+									<tr id="tr_tab_niv_{{ k }}" class="ligne_{{ rs.domaine }}" style="background-color: rgb(246, 244, 242); ">
+										<td>{{ rs.domaine }}</td>
+										<td id="{{ rs.sd_id }}">{{ rs.sousdomaine }}</td>
+										<td>{{ rs.nb_agents }}</td>
+										<td class='niveau'>{{ rs.niveau|round(1, 'floor') }}</td>
+										<td class='nPlusUn' contenteditable="true">{{ rs.nPlusUn|round(1, 'floor') }}</td>
+										<td class='nPlusDeux' contenteditable="true">{{ rs.nPlusDeux|round(1, 'floor') }}</td>
+										<td class='nPlusTrois' contenteditable="true">{{ rs.nPlusTrois|round(1, 'floor') }}</td>
+										{% set ecart = rs.nPlusUn|round(1, 'floor') - rs.niveau|round(1, 'floor')%}
+										{% if ecart > 0 %}
+											<td class='ecart'>{{ ecart }}</td>
+										{% else %}
+											<td class='ecart'>0</td>
+										{% endif %}
+										<td>
+											<a href="#" onclick="goSousDomaine('{{ rs.sd_id }}'); ">
+												<i class="material-icons">search</i>
+											</a>
+										</td>
+									</tr>
+								{% set k = k + 1 %}
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+
+					<div>
+						<h5 id="titre_partie2" class="titre_partie">
+							Graphiques des compétences en AIE
+						</h5>
+						<div class="input-field col s12" id="div_domaine_select">
+							<select id="domaine_select">
+								<option value="Tous" selected="selected">Tous</option>
+								{% for dom in domaines %}
+									<option value="{{ dom.domaine }}">{{ dom.domaine }}</option>
+								{% endfor %}
+							</select>
+							<label>Choix du domaine</label>
+						</div>
+					</div>
+					
+					<div class="espace"></div>
+					<div id="div_graphs" class="row" style="margin-top: 122px; padding: 0px 51px 51px 51px; ">
+						<div class="col s6" style="border-right: 1px rgb(25, 25, 0) solid; ">
+							<canvas id="graph_domaines"></canvas>
+						</div>
+						<div class="col s6">
+							<canvas id="graph_sousdomaines"></canvas>
+						</div>
+					</div>
+
+					<div>
+						<h5 id="titre_partie3" class="titre_partie">
+							Qualification spécifique
+						</h5>
+					</div>
+
+					<div style="padding: 51px; ">
+						<table id="tab_qualif" class="tooltipped" data-position="top" data-tooltip="Cliquer sur un case pour afficher le détail des agents.">
+							<tbody id="body_tab_qualif">
+								
+							</tbody>
+						</table>
+					</div>
+					<div id="myModal" class="modal" style="width: 90%; height: 1200px; ">
+						<div class="modal-content">
+							<h5 id='titre_popup' style="text-align: left; "></h5>
+							<table id="table_agents">
+								<thead>
+									<tr style="">
+										<th>Nom</th>
+										<th>Prénom</th>
+										<th>Pôle</th>
+										<th>B.O.</th>
+										<th>Niveau MMS</th>
+										<th id="cible">Attendu cible</th>
+										<th>Ecart</th>
+										<th><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Lien vers la fiche de l'agent, désactivé.">search</i></th>
+									</tr>
+								</thead>
+								<tbody id="table_agents_body">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div id="myModalAgent" class="modal" style="width: 60%; height: 1200px; ">
+						<div class="modal-content">
+							<h5 id='titre_popup_agent' style="text-align: left; "></h5>
+							<table id="table_agent_qualif">
+								<thead>
+									<tr style="">
+										<th>POLE</th>
+										<th>BO</th>
+										<th>NNI</th>
+										<th>AGENT</th>
+									</tr>
+								</thead>
+								<tbody id="table_agent_qualif_body">
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+			<script src="/js_globales_var"></script>
+			<script>
+				/////////////////////////////////////////DECLARATION DE VARIABLES GLOBALES SUPPLEMENTAIRES AU FICHIER GLOBALE_VAR.JS/////////////////////////////////////////
+				var aie_dats = {};
+				aie_dats.labs = [];
+				aie_dats.niveau = [];
+				aie_dats.nPlusUn = [];
+				aie_dats.nPlusDeux = [];
+				aie_dats.nPlusTrois = [];
+				var aie_sdats = {};
+				aie_sdats.labs = [];
+				aie_sdats.domaine = [];
+				aie_sdats.niveau = [];
+				aie_sdats.nPlusUn = [];
+				aie_sdats.nPlusDeux = [];
+				aie_sdats.nPlusTrois = [];
+
+				var agents_uos = [];
+				var agents_ids = [];
+
+				var nb_agents_niv1 = 0;
+				var nb_agents_niv2 = 0;
+				var nb_agents_niv3 = 0;
+				var nb_agents_niv4 = 0;
+
+				var nb_rip_niv1 = 0;        
+				var nb_rip_niv2 = 0;        
+				var nb_rip_niv3 = 0;        
+				var nb_rip_niv4 = 0;
+
+				var astreinte = "";
+
+				var h = {};
+
+				var nb_agent_req = 0;
+				var nb_agent_oui_astreinte = 0;
+				var nb_agent_non_astreinte = 0;
+
+				var s_agents = [];
+				var nnis = [];
+				var noms = [];
+				var prenoms = [];
+				var poles = [];
+				var bos = [];
+
+				var isClickedTabNiv = true;
+				var notAvfirstFiltre = false;
+
+				var s_agent = [];
+
+				//oooOOOooo---Objet nb_agents : Nombre d'agents par habilitations
+				var nb_agents = {};
+				nb_agents.rip = [];
+				nb_agents.rip_aerien = [];
+				nb_agents.rip_souterrain = [];
+				nb_agents.cdc = [];
+				nb_agents.cdc_aerien_hta = [];
+				nb_agents.cdc_aerien_bt = [];
+				nb_agents.cdc_poste_et_souterrain = [];
+				nb_agents.cdc_premier_troncon = [];
+				nb_agents.prv = [];
+				nb_agents.pers_separation_hta_sout = [];
+				nb_agents.pers_separation_bt_sout = [];
+				nb_agents.pers_separation_hta_aerien = [];
+				nb_agents.pers_separation_bt_aerien = [];
+				nb_agents.pers_requisition_hta_sout = [];
+				nb_agents.pers_requisition_bt_sout = [];
+				nb_agents.pers_manoeuvre_hta = [];
+				nb_agents.pers_manoeuvre_bt = [];
+				nb_agents.pers_manoeuvre_ps = [];
+				nb_agents.pers_manoeuvre_ips = [];
+				nb_agents.qualif_cable_hta_synth_aerien = [];
+				nb_agents.qualif_cable_synth_bt = [];
+				nb_agents.qualif_cable_hta_papier = [];
+				nb_agents.qualif_cable_synth_bt_pap = [];
+				nb_agents.divers_ge_ht_non_coupable = [];
+				nb_agents.divers_ge_ht_coupable = [];
+				nb_agents.divers_demarrage_ge_non_coupable = [];
+				nb_agents.divers_demarrage_ge_coupable = [];
+				nb_agents.divers_amiante = [];
+				nb_agents.divers_rd800 = [];
+				nb_agents.divers_idc = [];
+				nb_agents.divers_mesure_terre = [];
+				nb_agents.divers_linky = [];
+				nb_agents.divers_grip_linky = [];
+				nb_agents.astreinte = [];
+				nb_agents.pst = [];
+
+				nb_agents.nnis = [];
+				nb_agents.noms = [];
+				nb_agents.prenoms = [];
+				nb_agents.poles = [];
+				nb_agents.bos = [];
+				
+			var myRadarChart = [];
+
+				var s_uos = []; var s_etoiles = []; var uos_length = []; var nb_ags = [];
+				var ids_ags = []; var niveaux_ags = []; var uos_ags = []; var nni_ags = []; 
+				var noms_ags = []; var prenoms_ags = []; var poles_ags = []; var bos_ags = [];
+
+				var $data = []; 
+
+				var the_habs = ['cdc_premier_troncon', 'pers_separation_hta_sout', 'pers_separation_bt_sout', 'pers_separation_hta_aerien',
+									'pers_separation_bt_aerien', 'pers_requisition_hta_sout', 'pers_requisition_bt_sout', 'pers_manoeuvre_hta',
+									'pers_manoeuvre_bt', 'pers_manoeuvre_ps', 'pers_manoeuvre_ips', 'qualif_cable_hta_synth_aerien',
+									'qualif_cable_synth_bt', 'qualif_cable_hta_papier', 'qualif_cable_synth_bt_pap', 'divers_amiante',
+									'divers_ge_ht_non_coupable', 'divers_ge_ht_coupable', 'divers_demarrage_ge_non_coupable', 'divers_demarrage_ge_coupable',
+									'divers_rd800', 'divers_idc', 'divers_mesure_terre', 'divers_linky', 'divers_grip_linky'];
+				/////////////////////////////////////////CHARGEMENT DE LA PAGE/////////////////////////////////////////
+				$("document").ready(function () {
+				$('#modal_gpec').modal();
+				$('#myModal').modal();
+				$('#myModalAgent').modal();
+				
+				$('.tooltipped').tooltip();
+					
+				$('select').formSelect();
+
+				sort_by_all_filters();
+
+				raz_filters();
+				});
+				/////////////////////////////////////////CLIQUE SUR LE BOUTTON FILTRER/////////////////////////////////////////
+				$("#button_filtre").click(function () {
+					sort_by_all_filters();
+				});
+				/////////////////////////////////////////REMIS A ZERO DES FILTRES/////////////////////////////////////////
+				function raz_filters(){
+					$('#selectPole').val('');
+					$('#selectBo').val('');
+					$('#selectProfil').val('');
+					$('#selectAstreinte').val('');
+					$('#selectAgent').val('');
+				}
+				/////////////////////////////////////////PEUPLEMENT DES OBJETS UTILISEES POUR REMPLIR LA TABLE HTML DES COMPETENCES SPECIFIQUES/////////////////////////////////////////
+				function peuple_table_qualif(){
+					var o = {};
+					o.niv_rip = {};
+					o.niv_rip_aerien = {};
+					o.niv_rip_souter = {};
+					o.niv_cdc = {};
+					o.niv_cdc_hta = {};
+					o.niv_cdc_bt = {};
+					o.niv_cdc_ps = {};
+					o.niv_cdc_tron = {};
+					o.niv_prv = {};
+
+					doObj1(o.niv_rip, 'RIP', ['RIP1', 'RIP2', 'RIP3', 'PST'], 'rip');
+					doObj1(o.niv_rip_aerien, 'RIP Aérien', ['RIP1', 'RIP2', 'RIP3', 'PST'], 'rip_aerien');
+					doObj1(o.niv_rip_souter, 'RIP Souterrain', ['RIP1', 'RIP2', 'RIP3', 'PST'], 'rip_souterrain');
+					doObj1(o.niv_cdc, 'CDC', ['En formation', 'Chantiers simples', 'Travaux', 'PST'], 'cdc');
+					doObj1(o.niv_cdc_hta, 'CDC Aérien HTA', ['En formation', 'Chantiers simples', 'Travaux', 'PST'], 'cdc_aerien_hta');
+					doObj1(o.niv_cdc_bt, 'CDC Aérien BT', ['En formation', 'Chantiers simples', 'Travaux', 'PST'], 'cdc_aerien_bt');
+					doObj1(o.niv_cdc_ps, 'CDC Poste & Souterrain', ['En formation', 'Chantiers simples', 'Travaux', 'PST'], 'cdc_poste_et_souterrain');
+					doObj1_etoile(o.niv_cdc_tron, 'CDC Premier Tronçon', ['Agents'], 'cdc_premier_troncon');
+
+					var o2 = {};
+					o2.isPers = {};
+					o2.isPers.HtaSout = {};
+					o2.isPers.BtSout = {};
+					o2.isPers.HtaAerien = {};
+					o2.isPers.BtAerien = {};
+					o2.isReq = {};
+					o2.isReq.Hta = {};
+					o2.isReq.BtSout = {};
+					o2.isPersMan = {};
+					o2.isPersMan.Hta = {};
+					o2.isPersMan.Bt = {};
+					o2.isPersMan.Ps = {};
+					o2.isPersMan.Ips = {};
+					o2.isCable = {};
+					o2.isCable.HtaSynth = {};
+					o2.isCable.BtSynth = {};
+					o2.isCable.HtaPap = {};
+					o2.isCable.BtPap = {};
+
+					o2.isPers.col = "Personnel chargé de la séparation";
+					o2.isPers.HtaSout.nom = "HTA Souterrain";
+					o2.isPers.BtSout.nom = "BT Souterrain";
+					o2.isPers.HtaAerien.nom = "HTA Aérien";
+					o2.isPers.BtAerien.nom = "BT Aérien";
+					o2.isReq.col = "Personnel chargé de réquisition";
+					o2.isReq.Hta.nom = "HTA Souterrain";
+					o2.isReq.BtSout.nom = "BT Souterrain";
+					o2.isPersMan.col = "Personnel de manoeuvre";
+					o2.isPersMan.Hta.nom = "HTA";
+					o2.isPersMan.Bt.nom = "BT";
+					o2.isPersMan.Ps.nom = "Poste source";
+					o2.isPersMan.Ips.nom = "IPS 4.1 EME";
+					o2.isCable.col = "Qualification câble";
+					o2.isCable.HtaSynth.nom = "HTA Synthétique";
+					o2.isCable.BtSynth.nom = "BT Synthétique";
+					o2.isCable.HtaPap.nom = "HTA Papier";
+					o2.isCable.BtPap.nom = "BT Papier";
+		 
+					var o3 = {};
+					o3.isDiversligne1 = {};
+					o3.isDiversligne1.PoseGeNonCoupable = {};
+					o3.isDiversligne1.PoseGeCoupable = {};
+					o3.isDiversligne1.DemarrageNonCoupable = {};
+					o3.isDiversligne1.DemarrageCoupable = {};
+					o3.isDiversligne2 = {};
+					o3.isDiversligne2.Amiante = {};
+					o3.isDiversligne2.Rd800 = {};
+					o3.isDiversligne2.Idc = {};
+					o3.isDiversligne2.Mdt = {};
+					o3.isDiversligne3 = {};
+					o3.isDiversligne3.Linky = {};
+					o3.isDiversligne3.GripLinky = {};
+
+					o3.isDiversligne1.col = "Divers";
+					o3.isDiversligne1.PoseGeNonCoupable.nom = "Raccordement GE non coupable";
+					o3.isDiversligne1.PoseGeCoupable.nom = "Raccordement GE coupable";
+					o3.isDiversligne1.DemarrageNonCoupable.nom = "Démarrage GE non coupable";
+					o3.isDiversligne1.DemarrageCoupable.nom = "Démarrage GE coupable";
+					o3.isDiversligne2.col = "Divers";
+					o3.isDiversligne2.Amiante.nom = "Amiante";
+					o3.isDiversligne2.Rd800.nom = "RD8000";
+					o3.isDiversligne2.Idc.nom = "IDC";
+					o3.isDiversligne2.Mdt.nom = "Mesure de terre";
+					o3.isDiversligne3.col = "Divers";
+					o3.isDiversligne3.Linky.nom = "Linky";
+					o3.isDiversligne3.GripLinky.nom = "GRIP EP Linky";
+
+					peupleQualif(o, o2, o3);
+				}
+				/////////////////////////////////////////AJOUTE AU TABLEAU NB_AGENTS DES VALEURS AVEC LA CLE EN PARAMETRE HAB/////////////////////////////////////////
+				function renseigne_agents(hab, n){
+					nb_agents['nnis'][hab] = nnis[n];
+					nb_agents['noms'][hab] = noms[n];
+					nb_agents['prenoms'][hab] = prenoms[n];
+					nb_agents['poles'][hab] = poles[n];
+					nb_agents['bos'][hab] = bos[n];
+				}
+				////////////////PEUPLE L'OBJET NB_AGENTS PUIS UTILISE SES PROPRIETES POUR REMPLIR LE TABLEAU DES COMPETENCES SPECIFIQUES : AUTRES PARTIES QUE RIP CDC/////////////
+				function formate_etoile(nb_lignes){
+					$data = nb_agents_etoile_all_habs(the_habs);
+
+					nb_agents.cdc_premier_troncon = $data[0];
+					renseigne_agents('cdc_premier_troncon', 0);
+
+					nb_agents.pers_separation_hta_sout = $data[1];
+					renseigne_agents('pers_separation_hta_sout', 1);
+
+					nb_agents.pers_separation_bt_sout = $data[2];
+					renseigne_agents('pers_separation_bt_sout', 2);
+					
+					nb_agents.pers_separation_hta_aerien = $data[3];
+					renseigne_agents('pers_separation_hta_aerien', 3);
+
+					nb_agents.pers_separation_bt_aerien = $data[4];
+					renseigne_agents('pers_separation_bt_aerien', 4);
+
+					nb_agents.pers_requisition_hta_sout = $data[5];
+					renseigne_agents('pers_requisition_hta_sout', 5);
+
+					nb_agents.pers_requisition_bt_sout = $data[6];
+					renseigne_agents('pers_requisition_bt_sout', 6);
+
+					nb_agents.pers_manoeuvre_hta = $data[7];
+					renseigne_agents('pers_manoeuvre_hta', 7);
+
+					nb_agents.pers_manoeuvre_bt = $data[8];
+					renseigne_agents('pers_manoeuvre_bt', 8);
+
+					nb_agents.pers_manoeuvre_ps = $data[9];
+					renseigne_agents('pers_manoeuvre_ps', 9);
+
+					nb_agents.pers_manoeuvre_ips = $data[10];
+					renseigne_agents('pers_manoeuvre_ips', 10);
+
+					nb_agents.qualif_cable_hta_synth_aerien = $data[11];
+					renseigne_agents('qualif_cable_hta_synth_aerien', 11);
+
+					nb_agents.qualif_cable_synth_bt = $data[12];
+					renseigne_agents('qualif_cable_synth_bt', 12);
+
+					nb_agents.qualif_cable_hta_papier = $data[13];
+					renseigne_agents('qualif_cable_hta_papier', 13);
+
+					nb_agents.qualif_cable_synth_bt_pap = $data[14];
+					renseigne_agents('qualif_cable_synth_bt_pap', 14);
+
+					nb_agents.divers_amiante = $data[15];
+					renseigne_agents('divers_amiante', 15);
+
+					nb_agents.divers_ge_ht_non_coupable = $data[16];
+					renseigne_agents('divers_ge_ht_non_coupable', 16);
+
+					nb_agents.divers_ge_ht_coupable = $data[17];
+					renseigne_agents('divers_ge_ht_coupable', 17);
+
+					nb_agents.divers_demarrage_ge_non_coupable = $data[18];
+					renseigne_agents('divers_demarrage_ge_non_coupable', 18);
+
+					nb_agents.divers_demarrage_ge_coupable = $data[19];
+					renseigne_agents('divers_demarrage_ge_coupable', 19);
+
+					nb_agents.divers_rd800 = $data[20];
+					renseigne_agents('divers_rd800', 20);
+
+					nb_agents.divers_idc = $data[21];
+					renseigne_agents('divers_idc', 21);
+
+					nb_agents.divers_mesure_terre = $data[22];
+					renseigne_agents('divers_mesure_terre', 22);
+
+					nb_agents.divers_linky = $data[23];
+					renseigne_agents('divers_linky', 23);
+
+					nb_agents.divers_grip_linky = $data[24];
+					renseigne_agents('divers_grip_linky', 24);
+
+					sous_formate_etoile(8, 1, nb_agents.cdc_premier_troncon, 'cdc_premier_troncon');
+					sous_formate_etoile(10, 1, nb_agents.pers_separation_hta_sout, 'pers_separation_hta_sout');
+					sous_formate_etoile(10, 2, nb_agents.pers_separation_bt_sout, 'pers_separation_bt_sout');
+					sous_formate_etoile(10, 3, nb_agents.pers_separation_hta_aerien, 'pers_separation_hta_aerien');
+					sous_formate_etoile(10, 4, nb_agents.pers_separation_bt_aerien, 'pers_separation_bt_aerien');
+					sous_formate_etoile(11, 1, nb_agents.pers_requisition_hta_sout, 'pers_requisition_hta_sout');
+					sous_formate_etoile(11, 2, nb_agents.pers_requisition_bt_sout, 'pers_requisition_bt_sout');
+					sous_formate_etoile(12, 1, nb_agents.pers_manoeuvre_hta, 'pers_manoeuvre_hta');
+					sous_formate_etoile(12, 2, nb_agents.pers_manoeuvre_bt, 'pers_manoeuvre_bt');
+					sous_formate_etoile(12, 3, nb_agents.pers_manoeuvre_ps, 'pers_manoeuvre_ps');
+					sous_formate_etoile(12, 4, nb_agents.pers_manoeuvre_ips, 'pers_manoeuvre_ips');
+					sous_formate_etoile(13, 1, nb_agents.qualif_cable_hta_synth_aerien, 'qualif_cable_hta_synth_aerien');
+					sous_formate_etoile(13, 2, nb_agents.qualif_cable_synth_bt, 'qualif_cable_synth_bt');
+					sous_formate_etoile(13, 3, nb_agents.qualif_cable_hta_papier, 'qualif_cable_hta_papier');
+					sous_formate_etoile(13, 4, nb_agents.qualif_cable_synth_bt_pap, 'qualif_cable_synth_bt_pap');
+					sous_formate_etoile(14, 1, nb_agents.divers_ge_ht_non_coupable, 'divers_ge_ht_non_coupable');
+					sous_formate_etoile(14, 2, nb_agents.divers_ge_ht_coupable, 'divers_ge_ht_coupable');
+					sous_formate_etoile(14, 3, nb_agents.divers_demarrage_ge_non_coupable, 'divers_demarrage_ge_non_coupable');
+					sous_formate_etoile(14, 4, nb_agents.divers_demarrage_ge_coupable, 'divers_demarrage_ge_coupable');
+					sous_formate_etoile(15, 1, nb_agents.divers_amiante, 'divers_amiante');
+					sous_formate_etoile(15, 2, nb_agents.divers_rd800, 'divers_rd800');
+					sous_formate_etoile(15, 3, nb_agents.divers_idc, 'divers_idc');
+					sous_formate_etoile(15, 4, nb_agents.divers_mesure_terre, 'divers_mesure_terre');
+					sous_formate_etoile(16, 1, nb_agents.divers_linky, 'divers_linky');
+					sous_formate_etoile(16, 2, nb_agents.divers_grip_linky, 'divers_grip_linky');
+
+					nb_agent_req = parseInt(nb_agent_req);
+					nb_agent_oui_astreinte = parseInt(nb_agent_oui_astreinte);
+					nb_agent_non_astreinte = parseInt(nb_agent_non_astreinte);
+					dats_uo.nb_agent_prv = parseInt(dats_uo.nb_agent_prv);
+					dats_uo.nb_agent_pst = parseInt(dats_uo.nb_agent_pst);
+
+					var nb_non_prv = nb_agent_req - dats_uo.nb_agent_prv;
+					var nb_non_pst = nb_agent_req - dats_uo.nb_agent_pst;
+
+					var prem_tron_oui = nb_agents.cdc_premier_troncon;
+					prem_tron_oui = parseInt(prem_tron_oui);
+					var prem_tron_non = nb_agent_req - prem_tron_oui;
+
+
+					$('#tab_qualif').append("<tr id=tab_qualif_ligne_" + nb_lignes + "></tr>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td class='titrecol'>Astreinte</td>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td id='astreinte_oui' style='text-align: center; '>OUI : " + nb_agent_oui_astreinte + "</td>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td id='astreinte_non' style='text-align: center; '>NON : " + nb_agent_non_astreinte + "</td>");
+
+					$("#tab_qualif_ligne_9").children().first().text("Activités clientèles (PRV)");
+					$("#tab_qualif_ligne_9").append("<td id='prv_oui' style='text-align: center; '>OUI : " + dats_uo.nb_agent_prv + "</td>");
+					$("#tab_qualif_ligne_9").append("<td id='prv_non' style='text-align: center; '>NON : " + nb_non_prv + "</td>");
+
+					$("#tab_qualif_ligne_8").children().first().next().text("OUI : " + prem_tron_oui);
+					$("#tab_qualif_ligne_8").append("<td id='premtron_non' style='text-align: center; '>NON : " + prem_tron_non + "</td>");
+
+					nb_lignes++;
+
+					$('#tab_qualif').append("<tr id=tab_qualif_ligne_" + nb_lignes + "></tr>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td class='titrecol'>Compagnons PST</td>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td id='pst_oui' style='text-align: center; '>OUI : " + dats_uo.nb_agent_pst + "</td>");
+					$("#tab_qualif_ligne_" + nb_lignes).append("<td id='pst_non' style='text-align: center; '>NON : " + nb_non_pst + "</td>");
+
+					$("#astreinte_oui, #astreinte_non").click(function(){      
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('agents_by_astreinte_no_agent_json')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('agents_by_astreinte_no_agent_json')}}";
+							}
+							else{
+								$path  = "{{path('agents_by_astreinte_agent_json')}}";
+							}
+						}
+
+						var txt = $(this).text().substr(0, 1);
+
+						var s_astreinte = 'non';
+						if(txt == 'O'){s_astreinte = 'oui'; }
+
+						$.post($path, {
+								objet: 'AGENTS_ASTREINTE',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents
+							}, 
+						function (data_json) {
+							var nb_agents_size = data_json.length;
+
+							var titre = "Agents non habilités à l'astreinte : " + nb_agents_size + " agents";
+							if(s_astreinte == 'oui'){
+								var titre = "Agents habilités à l'astreinte : " + nb_agents_size + " agents";
+							}
+
+							var elem = document.querySelector('#myModalAgent');
+							var instance = M.Modal.getInstance(elem);
+
+							$("#table_agent_qualif_body").remove();
+							$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+							$("#titre_popup_agent").text(titre);
+
+							for(var i = 0; i <nb_agents_size; i++){
+								var the_nni =  data_json[i]['nni'];
+								var the_agent =  data_json[i]['nom'] + " " + data_json[i]['prenom'];
+
+								var the_bo = data_json[i]['bo'];
+								var the_pole = data_json[i]['pole'];
+
+								$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+								$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+								$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+								$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+								$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+							}
+
+							instance.open();
+						});
+					});
+					$("#pst_oui, #pst_non").click(function(){      
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+						var s_astreinte = $("#selectAstreinte").val();
+
+						var txt = $(this).text().substr(0, 1);
+
+						var s_pst = 'non';
+						if(txt == 'O'){s_pst = 'oui'; }
+						
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('agents_by_pst_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('agents_by_pst_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('agents_by_pst_json_agent')}}";
+							}
+						}
+
+						$.post($path, {
+								objet: 'AGENTS_PST',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents,
+								pst: s_pst
+							}, 
+						function (data_json) {
+							var nb_agents_size = data_json.length;
+							var titre = "Agents compagnons PST : " + nb_agents_size + " agents";
+							if(s_pst == 'non'){
+								nb_agents_size = data_json['nni'].length;
+								var titre = "Agents non compagnons PST : " + nb_agents_size + " agents"; 
+							 }
+
+							var elem = document.querySelector('#myModalAgent');
+							var instance = M.Modal.getInstance(elem);
+
+							$("#table_agent_qualif_body").remove();
+							$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+							$("#titre_popup_agent").text(titre);
+							if(s_pst == 'oui'){
+								for(var i = 0; i <nb_agents_size; i++){
+									var the_nni =  data_json[i]['nni'];
+									var the_agent =  data_json[i]['nom'] + " " + data_json[i]['prenom'];
+
+									var the_bo = data_json[i]['bo'];
+									var the_pole = data_json[i]['pole'];
+
+									$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+									$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+									$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+								}
+							}
+							else{
+								for(var i = 0; i <nb_agents_size; i++){
+									var the_nni =  data_json['nni'][i];
+									var the_agent =  data_json['nom'][i] + " " + data_json['prenom'][i];
+
+									var the_bo = data_json['bo'][i];
+									var the_pole = data_json['pole'][i];
+
+									$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+									$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+									$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+								}
+							}
+
+							instance.open();
+						
+						});
+
+					});
+					$("#prv_oui, #prv_non").click(function(){      
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+						var s_astreinte = $("#selectAstreinte").val();
+
+						var txt = $(this).text().substr(0, 1);
+
+						var s_prv = 'non';
+						if(txt == 'O'){s_prv = 'oui'; }
+
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('agents_by_prv_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('agents_by_prv_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('agents_by_prv_json_agent')}}";
+							}
+						}
+
+						$.post($path, {
+								objet: 'AGENTS_PRV',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents,
+								prv: s_prv
+							}, 
+						function (data_json) {
+							var nb_agents_size = data_json.length;
+							var titre = "Agents PRV : " + nb_agents_size + " agents";
+							if(s_prv == 'non'){
+								nb_agents_size = data_json['nni'].length;
+								var titre = "Agents non PRV : " + nb_agents_size + " agents"; 
+							 }
+
+							var elem = document.querySelector('#myModalAgent');
+							var instance = M.Modal.getInstance(elem);
+
+							$("#table_agent_qualif_body").remove();
+							$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+							$("#titre_popup_agent").text(titre);
+							if(s_prv == 'oui'){
+								for(var i = 0; i <nb_agents_size; i++){
+									var the_nni =  data_json[i]['nni'];
+									var the_agent =  data_json[i]['nom'] + " " + data_json[i]['prenom'];
+
+									var the_bo = data_json[i]['bo'];
+									var the_pole = data_json[i]['pole'];
+
+									$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+									$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+									$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+								}
+							}
+							else{
+								for(var i = 0; i <nb_agents_size; i++){
+									var the_nni =  data_json['nni'][i];
+									var the_agent =  data_json['nom'][i] + " " + data_json['prenom'][i];
+
+									var the_bo = data_json['bo'][i];
+									var the_pole = data_json['pole'][i];
+
+									$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+									$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+									$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+									$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+								}
+							}
+
+							instance.open();
+						
+						});
+
+					});
+					$("#premtron_non").click(function(){      
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+						var s_astreinte = $("#selectAstreinte").val();
+
+						var txt = $(this).text().substr(0, 1);
+
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('agents_by_premtron_non_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('agents_by_premtron_non_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('agents_by_premtron_non_json_agent')}}";
+							}
+						}
+
+						$.post($path, {
+								objet: 'AGENTS_PREM_TRON_NON',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								agents: s_agents,
+								astreinte: s_astreinte,
+							}, 
+						function (data_json) {
+							var nb_agents_size = data_json['nni'].length;
+							var titre = "Agents non premier tronçon : " + nb_agents_size + " agents";
+
+							var elem = document.querySelector('#myModalAgent');
+							var instance = M.Modal.getInstance(elem);
+
+							$("#table_agent_qualif_body").remove();
+							$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+							$("#titre_popup_agent").text(titre);
+							for(var i = 0; i <nb_agents_size; i++){
+								var the_nni =  data_json['nni'][i];
+								var the_agent =  data_json['nom'][i] + " " + data_json['prenom'][i];
+
+								var the_bo = data_json['bo'][i];
+								var the_pole = data_json['pole'][i];
+
+								$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+								$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+								$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+								$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+								$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+							}
+							
+							instance.open();
+						
+						});
+
+					});
+				}
+				//////////////////PEUPLE L'OBJET NB_AGENTS PUIS UTILISE SES PROPRIETES POUR REMPLIR LE TABLEAU DES COMPETENCES SPECIFIQUES : PARTIE RIP CDC/////
+				function formate_rip_cdc(){
+					var habs_tab = ['rip', 'rip_aerien', 'rip_souterrain', 'cdc', 'cdc_aerien_hta', 'cdc_aerien_bt', 'cdc_poste_et_souterrain'];
+
+					nb_agents.rip = nb_agents_by_hab('rip');
+					nb_agents.rip_aerien = nb_agents_by_hab('rip_aerien');
+					nb_agents.rip_souterrain = nb_agents_by_hab('rip_souterrain');
+					nb_agents.cdc = nb_agents_by_hab('cdc');
+					nb_agents.cdc_aerien_hta = nb_agents_by_hab('cdc_aerien_hta');
+					nb_agents.cdc_aerien_bt = nb_agents_by_hab('cdc_aerien_bt');
+					nb_agents.cdc_poste_et_souterrain = nb_agents_by_hab('cdc_poste_et_souterrain');
+
+					sous_formate_rip_cdc(1, nb_agents.rip, 'rip');
+					sous_formate_rip_cdc(2, nb_agents.rip_aerien, 'rip_aerien');
+					sous_formate_rip_cdc(3, nb_agents.rip_souterrain, 'rip_souterrain');
+					sous_formate_rip_cdc(4, nb_agents.cdc, 'cdc');
+					sous_formate_rip_cdc(5, nb_agents.cdc_aerien_hta, 'cdc_aerien_hta');
+					sous_formate_rip_cdc(6, nb_agents.cdc_aerien_bt, 'cdc_aerien_bt');
+					sous_formate_rip_cdc(7, nb_agents.cdc_poste_et_souterrain, 'cdc_poste_et_souterrain');
+				}
+				/////////////////////////////////////////UTILISE SES PARAMETRES POUR REMPLIR LE TABLEAU DES COMPETENCES SPECIFIQUES : PARTIE RIP CDC/////
+				function sous_formate_rip_cdc(num_ligne, nombre_agents, hab_prop){
+					 var k = 0; var z = 0;
+					 $("#tab_qualif_ligne_" + num_ligne).children().each(function(){
+						if(k > 0){
+							var txt_av = $(this).text();
+
+							for(var t = 0; t < txt_av.length; t++){
+								if(txt_av[t] == ':'){
+									txt_av = txt_av.substr(0, t - 1);
+									break;
+								}
+							}
+
+							var txt_ap = txt_av + " : " + nombre_agents[k - 1];
+							$(this).text(txt_ap);
+							$(this).attr('id', hab_prop + "_" + k);
+
+							$("#" + hab_prop + "_" + k).click(function(){
+								var titre_ligne = $(this).parent().children().first().text();
+
+								var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+								var s_pole = "";
+								s_pole = s_pole_tab;
+
+								var s_bo = $("#selectBo").val();
+								var s_profil = $("#selectProfil").val();
+								var s_astreinte = $("#selectAstreinte").val();
+
+								var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+								var agents_size = s_agents.length;
+								if(agents_size == 0){
+									$path  = "{{path('det_agents_by_hab_json_no_agent')}}";
+								}
+								else{
+									if(s_agents[0] == ""){
+										$path  = "{{path('det_agents_by_hab_json_no_agent')}}";
+									}
+									else{
+										$path  = "{{path('det_agents_by_hab_json_agent')}}";
+									}
+								}
+
+								var s_uos = [];
+								for(var i = 0; i < habilitations[hab_prop].uos.length; i++){
+									s_uos.push(makeHab(habilitations[hab_prop]['uos'][i]));
+								}
+								var uos_length = s_uos.length;
+								var s_niveau = $(this).attr('id').substr($(this).attr('id').length - 1, 1);
+
+								$.post($path, {
+									objet: 'DET_AGENTS_BY_HAB',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									agents: s_agents,
+									uos: s_uos,
+									niveau: s_niveau
+								}, 
+								function (data_json) {
+									var nb_agents_size = data_json['nni'].length;
+									var titre = titre_ligne + " - " + txt_ap +  " agents";
+
+									var elem = document.querySelector('#myModalAgent');
+									var instance = M.Modal.getInstance(elem);
+
+									$("#table_agent_qualif_body").remove();
+									$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+									$("#titre_popup_agent").text(titre);
+
+									for(var i = 0; i <nb_agents_size; i++){
+										var the_nni =  data_json['nni'][i];
+										var the_agent =  data_json['nom'][i] + " " + data_json['prenom'][i];
+
+										var the_bo = data_json['bo'][i];
+										var the_pole = data_json['pole'][i];
+
+										$("#table_agent_qualif_body").append("<tr id='ligne_td_" + i + "'></tr>");
+
+										$("#ligne_td_" + i).append("<td>" + the_pole + "</td>");
+										$("#ligne_td_" + i).append("<td>" + the_bo + "</td>");
+										$("#ligne_td_" + i).append("<td>" + the_nni + "</td>");
+										$("#ligne_td_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+									}
+									
+									instance.open();
+								});
+							z++;
+							});
+						}
+						k++;
+					});
+				}
+				/////////////////////////////////////REMPLIR LE TABLEAU DES COMPETENCES SPECIFIQUES : AUTRES PARTIES QUE RIP CDC////////////////////////////////////////////
+				function sous_formate_etoile(num_ligne, num_col, nb_ags, the_hab){
+					num_col--;
+					var txt_av = $("#tab_qualif_ligne_" + num_ligne).children().first().nextAll().eq(num_col).text();
+					var nb_agt = "";
+
+					for(var t = 0; t < txt_av.length; t++){
+						if(txt_av[t] == ':'){
+							nb_agt = txt_av.substr(t + 1, txt_av.length - 1);
+							txt_av = txt_av.substr(0, t - 1);
+
+							break;
+						}
+					}
+
+					var txt_ap = txt_av + " : " + nb_ags;
+					$("#tab_qualif_ligne_" + num_ligne).children().first().nextAll().eq(num_col).text(txt_ap);
+					$("#tab_qualif_ligne_" + num_ligne).children().first().nextAll().eq(num_col).attr('id', the_hab);
+
+					$("#" + the_hab).click(function(){
+						var th_hb = $(this).attr('id');
+						var nb_agents_size = nb_agents['nnis'][th_hb].length;
+
+						var titre = $(this).parent().children().first().text() + " - "  + txt_av + " : " + nb_agents_size + " agents";
+
+						var elem = document.querySelector('#myModalAgent');
+						var instance = M.Modal.getInstance(elem);
+
+						$("#table_agent_qualif_body").remove();
+						$("#table_agent_qualif").append("<tbody id='table_agent_qualif_body'></tbody>");
+
+						$("#titre_popup_agent").text(titre);
+
+						for(var i = 0; i <nb_agents_size; i++){
+							var the_nni =  nb_agents['nnis'][th_hb][i];
+							var the_agent =  nb_agents['noms'][th_hb][i] + " " + nb_agents['prenoms'][th_hb][i];
+
+							var the_bo = nb_agents['bos'][th_hb][i];
+							var the_pole = nb_agents['poles'][th_hb][i];
+
+							$("#table_agent_qualif_body").append("<tr id='ligne_" + th_hb + "_" + i + "'></tr>");
+
+							$("#ligne_" + th_hb + "_" + i).append("<td>" + the_pole + "</td>");
+							$("#ligne_" + th_hb + "_" + i).append("<td>" + the_bo + "</td>");
+							$("#ligne_" + th_hb + "_" + i).append("<td>" + the_nni + "</td>");
+							$("#ligne_" + th_hb + "_" + i).append("<td class='nom_agent'>" + the_agent + "</td>");
+						}
+
+						instance.open();
+					});
+				}
+				/////////////////////////////////////PETITES FONCTIONS D'ATTRIBUTION DE PARAMETRES////////////////////////////////////////////
+				function doObj1(obj1, firstcol, noms, val){
+					obj1.firstcol = firstcol;
+					obj1.noms = noms;
+				}
+				function doObj1_etoile_prv(obj1, firstcol, noms, val){
+					obj1.firstcol = firstcol;
+					obj1.noms = noms;
+				}
+				function doObj1_etoile(obj1, firstcol, noms, val){
+					obj1.firstcol = firstcol;
+					obj1.noms = noms;
+				}
+				function doObj2_etoile(obj2, firstcol, nom, val){
+					obj2.col = firstcol;
+					obj2.nom = nom;
+				}
+				//////////////////////////////////////////////RETOURNE LE NOMBRE D'ETOILE DE L'HABILITATION EN PARAMETRE////////////////////////////////////////
+				function compte_etoiles(nom_hab){
+					var nivs = [];
+					for(i = 0; i < dats_uo.code.length; i++){
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var uo = habilitations[nom_hab]['uos'][j];
+
+							hab = makeHab(uo);    
+
+							if(dats_uo.code[i] == hab){
+								if(dats_uo.niveau[i] > 0){
+									nivs.push(parseInt(dats_uo.niveau[i]));
+								}
+							}    
+						}
+					}
+					var niveau = Math.min.apply(null, nivs);
+					var niveau_max = Math.max.apply(null, nivs);
+					if(niveau == "Infinity"){niveau = 0;}
+
+					etoiles = niveau;
+					if(niveau_max > niveau){
+						etoiles = niveau + 1;
+					}
+
+					return etoiles;
+				}
+				/////////////////////////////////////RETOURNE LE NOMBRE D'AGENTS SELON L'ATTRIBUT S_HAB : PARTIE RIP CDC////////////////////////////////////////////
+				function nb_agents_by_hab(s_hab){
+				 if(typeof(habilitations[s_hab]) != "undefined"){
+				jQuery.ajaxSetup({async:false});
+
+						var nbs_doublons = []; var niveaux_min = [];
+
+						nnis = []; noms = []; prenoms = [];
+
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+						var s_astreinte = $("#selectAstreinte").val();
+
+						var s_uos = [];
+						for(var i = 0; i < habilitations[s_hab]['uos'].length; i++){
+							s_uos.push(makeHab(habilitations[s_hab]['uos'][i]));
+						}
+						var uos_length = s_uos.length;
+
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('nb_agents_by_hab_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('nb_agents_by_hab_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('nb_agents_by_hab_json_agent')}}";
+							}
+						}
+
+					   $.post($path, {
+									objet: 'NB_AGENTS_BY_HAB',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									uos: s_uos,
+									agents: s_agents
+								}, 
+							function (data_json) {
+								nb_agents_niv1 = 0;
+								nb_agents_niv2 = 0;
+								nb_agents_niv3 = 0;
+								nb_agents_niv4 = 0;
+
+								for(var i = 0; i < data_json.length; i++){
+									var niveau = data_json[i]['niveau_min'];
+									var nb_doublons = data_json[i]['nb_doublons'];
+
+									if(nb_doublons == uos_length || 1 == 1){
+										if(niveau == 1){
+											nb_agents_niv1++;
+										}
+										else if(niveau == 2){
+											nb_agents_niv2++;
+										}
+										else if(niveau == 3){
+											nb_agents_niv3++;
+										}
+									}
+								}
+							});
+						if(agents_size == 0){
+							$path  = "{{path('nb_agents_by_hab_pst_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('nb_agents_by_hab_pst_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('nb_agents_by_hab_pst_json_agent')}}";
+							}
+						}
+					   $.post($path, {
+									objet: 'nb_agents_by_hab_pst_json',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									agents: s_agents,
+									uos: s_uos
+								}, 
+							function (data_json) {
+								nb_agents_niv4 = data_json[0]['nb_agents'];
+							});
+
+						return [nb_agents_niv1, nb_agents_niv2, nb_agents_niv3, nb_agents_niv4];
+				}
+				else{
+					return 0;
+				}
+				}
+				/////////////////////////////////////RETOURNE LE NOMBRE D'AGENTS SELON L'ATTRIBUT S_HAB : AUTRE PARTIE QUE RIP CDC////////////////////////////////////////
+				var kk = 0;
+				function nb_agents_etoile(s_hab){
+					if(typeof(habilitations[s_hab]) != "undefined"){
+				   jQuery.ajaxSetup({async:false});
+
+						nnis = []; noms = []; prenoms = []; poles = []; bos = [];
+
+						kk++;
+
+						var nb_ags = 0;
+						var ids_ags = []; var uos_ags = []; var nni_ags = []; var noms_ags = []; var prenoms_ags = []; var poles_ags = []; var bos_ags = [];
+
+						var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+						var s_pole = "";
+						s_pole = s_pole_tab;
+
+						var s_bo = $("#selectBo").val();
+						var s_profil = $("#selectProfil").val();
+						var s_astreinte = $("#selectAstreinte").val();
+
+						var s_uos = [];
+						var s_etoiles = [];
+						for(var i = 0; i < habilitations[s_hab]['uos'].length; i++){
+							s_uos.push(makeHab(habilitations[s_hab]['uos'][i]));
+							s_etoiles.push(makeHab(habilitations[s_hab]['etoiles'][i]));
+						}
+						var uos_length = s_uos.length;
+
+						var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+						var agents_size = s_agents.length;
+						if(agents_size == 0){
+							$path  = "{{path('nb_agents_tot_json_no_agent')}}";
+						}
+						else{
+							if(s_agents[0] == ""){
+								$path  = "{{path('nb_agents_tot_json_no_agent')}}";
+							}
+							else{
+								$path  = "{{path('nb_agents_tot_json_agent')}}";
+							}
+						}
+
+						if(s_hab == 'cdc_premier_troncon' || s_hab == 'prv' || s_hab == 'astreinte' || s_hab == 'compagnon_pst'){
+							$.post($path, {
+									objet: 'NB_AGENTS_TOT',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									agents: s_agents,
+								}, 
+							function (data_json) {
+								nb_agent_req = data_json[0][0][1];
+								nb_agent_oui_astreinte = data_json[1][0][1];
+								nb_agent_non_astreinte = data_json[2][0][1];
+							});
+						}
+
+					   $.post("{{path('nb_agents_by_hab_etoile_json')}}", {
+									objet: 'NB_AGENTS_BY_HAB_ETOILE',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									agents: s_agents,
+									uos: s_uos
+								}, 
+							function (data_json) {
+								var nni = "";
+								var nom = "";
+								var prenom = "";
+								var pole = "";
+								var bo = "";
+
+								var nnis_tmp = [];
+								var noms_tmp = [];
+								var prenoms_tmp = [];
+								var poles_tmp = [];
+								var bos_tmp = [];
+
+								for(var i = 0; i < data_json.length; i++){
+									ids_ags.push(data_json[i]['agent_id']);
+									niveaux_ags.push(data_json[i]['niveau']);
+									uos_ags.push(data_json[i]['uo_id']);
+
+									nni = data_json[i]['nni'];
+									nom = data_json[i]['nom'];
+									prenom = data_json[i]['prenom'];
+									pole = data_json[i]['pole'];
+									bo = data_json[i]['bo'];
+
+									nnis_tmp.push(nni);
+									noms_tmp.push(nom);
+									prenoms_tmp.push(prenom);
+									poles_tmp.push(pole);
+									bos_tmp.push(bo);
+								}
+
+								ids_ags.push(ids_ags[ids_ags.length - 1] + 1);
+
+								var fin = 0; var compte = 0; fin_av = 0; start = 0;
+								for(var i = 1; i < ids_ags.length; i++){
+									if(ids_ags[i] != ids_ags[i - 1]){
+										fin = i - 1;
+										compte = fin - fin_av;
+										compte_av = compte;
+										start = fin_av + 1;
+										fin_av = fin;
+
+										var isGood = true;
+										for(var x = start; x <= fin; x++){
+											if(niveaux_ags[x] < s_etoiles[s_uos.indexOf(uos_ags[x])]){
+												isGood = false;
+											}
+										}
+										if(isGood){
+											nb_ags++;
+											
+											var num = i - 1;
+											nnis.push(nnis_tmp[num]);
+											noms.push(noms_tmp[num]);
+											prenoms.push(prenoms_tmp[num]);
+											poles.push(poles_tmp[num]);
+											bos.push(bos_tmp[num]);
+										}
+									}
+								}
+							}
+						);
+						return nb_ags;
+				}
+				else{
+					return 0;
+				}
+				}
+				/////////////////////////////////////RETOURNE LE NOMBRE D'AGENTS SELON L'ATTRIBUT S_HABS : AUTRE PARTIE QUE RIP CDC////////////////////////////////////////
+				var kk = 0;
+				function nb_agents_etoile_all_habs(s_habs){
+					jQuery.ajaxSetup({async:false});
+
+					nnis = []; noms = []; prenoms = []; poles = []; bos = [];
+
+					kk++;
+
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+							 
+					for(var i = 0; i < s_habs.length; i++){
+						if(typeof(habilitations[s_habs[i]]) != "undefined"){
+					var the_hab = s_habs[i];
+					nnis[the_hab] = [];
+					noms[the_hab] = [];
+					prenoms[the_hab] = [];
+					poles[the_hab] = [];
+					bos[the_hab] = [];
+
+					s_uos[i] = [];
+					s_etoiles[i] = [];
+					for(var j = 0; j < habilitations[the_hab]['uos'].length; j++){
+						s_uos[i].push(makeHab(habilitations[the_hab]['uos'][j]));
+						s_etoiles[i].push(makeHab(habilitations[the_hab]['etoiles'][j]));
+					}
+					uos_length[i] = s_uos[i].length;
+				}
+					}
+
+					var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+					var agents_size = s_agents.length;
+					if(agents_size == 0){
+						$path  = "{{path('nb_agents_tot_json_no_agent')}}";
+					}
+					else{
+						if(s_agents[0] == ""){
+							$path  = "{{path('nb_agents_tot_json_no_agent')}}";
+						}
+						else{
+							$path  = "{{path('nb_agents_tot_json_agent')}}";
+						}
+					}
+
+					for(var zzz = 0; zzz < s_habs.length; zzz++){
+						var s_hab = s_habs[zzz];
+						if(s_hab == 'cdc_premier_troncon' || s_hab == 'prv' || s_hab == 'astreinte' || s_hab == 'compagnon_pst'){
+							$.post($path, {
+									objet: 'NB_AGENTS_TOT',
+									pole: s_pole,
+									bo: s_bo,
+									profil: s_profil,
+									astreinte: s_astreinte,
+									agents: s_agents,
+								}, 
+							function (data_json) {
+								nb_agent_req = data_json[0][0][1];
+								nb_agent_oui_astreinte = data_json[1][0][1];
+								nb_agent_non_astreinte = data_json[2][0][1];
+							});
+						}
+					}
+					var s_uos_test = []; var k = 0
+					for(var prop in s_uos){
+						s_uos_test[k] = s_uos[prop];
+
+						k++;;
+					}
+					$.post("{{path('nb_agents_by_all_habs_etoile_json')}}", {
+								objet: 'NB_AGENTS_BY_ALL_HABS_ETOILE',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents,
+								uos: ['UO1', 'UO2', 'UO3', 'UO4', 'UO5', 'UO6', 'UO7', 'UO8','UO9', 'UO10']
+							}, 
+					function (data_json) {
+						var nni = "";
+						var nom = "";
+						var prenom = "";
+						var pole = "";
+						var bo = "";
+
+						var nnis_tmp = [];
+						var noms_tmp = [];
+						var prenoms_tmp = [];
+						var poles_tmp = [];
+						var bos_tmp = [];
+						for(var t = 0; t < data_json.length; t++){
+							
+							nnis[t] = []; noms[t] = []; prenoms[t] = []; poles[t] = []; bos[t] = [];
+
+							nb_ags[t] = 0;
+							nnis[s_uos[t]] = [];
+							nnis_tmp[t] = [];
+							noms_tmp[t] = [];
+							prenoms_tmp[t] = [];
+							poles_tmp[t] = [];
+							bos_tmp[t] = [];
+							ids_ags[t] = [];
+							nni_ags[t] = [];
+							niveaux_ags[t] = [];
+							uos_ags[t] = [];
+							noms_ags[t] = [];
+							prenoms_ags[t] = [];
+							poles_ags[t] = [];
+							bos_ags[t] = [];
+							for(var i = 0; i < data_json[t].length; i++){
+								ids_ags[t].push(data_json[t][i]['agent_id']);
+								nni_ags[t].push(data_json[t][i]['nni']);
+								niveaux_ags[t].push(data_json[t][i]['niveau']);
+								uos_ags[t].push(data_json[t][i]['uo_id']);
+								noms_ags[t].push(data_json[t][i]['nom']);
+								prenoms_ags[t].push(data_json[t][i]['prenom']);
+								poles_ags[t].push(data_json[t][i]['pole']);
+								bos_ags[t].push(data_json[t][i]['bo']);
+							}
+
+							for(var i = 0; i < niveaux_ags[t].length; i = i + s_etoiles[t].length){
+								var isGood = true; var the_nni = "";
+								for(var j = 0; j < s_etoiles[t].length; j++){
+									if(niveaux_ags[t][i + j] < s_etoiles[t][j]){
+										isGood = false;
+									}
+								}
+
+								if(isGood){
+									nb_ags[t] = nb_ags[t] + 1;
+
+									nnis[t].push(nni_ags[t][i]);
+									noms[t].push(noms_ags[t][i]);
+									prenoms[t].push(prenoms_ags[t][i]);
+									poles[t].push(poles_ags[t][i]);
+									bos[t].push(bos_ags[t][i]);      
+								}
+								else{
+									
+								}
+							} 
+						}
+					});
+
+					return nb_ags;
+				}
+				/////////////////////////////////////ALIMENTE LE TABLEAU EN PARAMETRE AVEC LA VALEUR EN PARAMETRE SI ELLE N'EST PAS DEJA DANS LE TABLEAU////////////////////////
+				function push_if_unique(tab, val){
+					if(tab.indexOf(val) == -1){
+						tab.push(val);
+					}
+				}
+				/////////////////////////////////////DEDOUBLONNE UN TABLEAU////////////////////////////////////////////
+				function array_unique(arr) {
+					var result = [],
+						i;
+					for (i = 0; i < arr.length; i++) {
+						if (result.indexOf(arr[i]) === -1) {
+						result.push(arr[i]);
+						}
+					}
+					return result;
+				}
+				/////////////////////////////////////ECRIT UNE SUITE DE CONSOLE;LOG AVEC UN TABLEAU////////////////////////////////////////////
+				function consoleTab(txt, tab){
+					for(var i = 0; i < tab.length; i++){
+						console.log(txt + tab[i]);
+					}
+				}
+				/////////////////////////////////////AFFICHE UN POPUP QUAND CLIQUE SUR LE SOUS DOMAINE DONT L'ID EST EN ATTRIBUT DE CETTE FONCTION/////////////////////////////
+				function goSousDomaine(sd_id){
+					var elem = document.querySelector('#myModal');
+					var instance = M.Modal.getInstance(elem);
+
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+					var s_sd_id = sd_id;
+
+					var annee_sel = $("input:radio[name ='choix_annee']:checked").val();
+					var difference = annee_sel - anneeEnCours;
+					
+					var domaine = "";
+					var sousdomaine = "";
+
+					var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+					var agents_size = s_agents.length;
+					if(agents_size == 0){
+						$path  = "{{path('popup_tab_json_no_agent')}}";
+					}
+					else{
+						if(s_agents[0] == ""){
+							$path  = "{{path('popup_tab_json_no_agent')}}";
+						}
+						else{
+							$path  = "{{path('popup_tab_json_agent')}}";
+						}
+					}
+					$.post($path, {
+								objet: 'POPUP_TAB',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents,
+								sd_id: s_sd_id
+							}, 
+							function (data_json) {
+							$("#table_agents_body").remove(); 
+							$("#table_agents").append("<tbody id='table_agents_body'></tbody>");
+
+							for(var i = 0; i < data_json.length; i++){
+								var nPlus = 0;
+								var nom = data_json[i].nom; 
+								var prenom = data_json[i].prenom; 
+								var pole = data_json[i].pole; 
+								var bo = data_json[i].bo; 
+								var niveau = data_json[i].niveau; 
+								var ag_id = data_json[i].agent_id;
+
+								if(i == 0){sousdomaine = data_json[i].sousdomaine; domaine = data_json[i].domaine;} 
+
+								if (difference == 1) {
+									var nPlus = arrondiOne(data_json[i].nPlusUn);
+								} else if (difference == 2) {
+									var nPlus = arrondiOne(data_json[i].nPlusDeu);
+								} else if (difference == 3) {
+									var nPlus = arrondiOne(data_json[i].nPlusTrois);
+								}
+
+								if(isNaN(nPlus)){nPlus = 0; }  
+
+								var ecart = arrondiOne(nPlus - niveau);
+
+								if(ecart < 0 || isNaN(ecart) || ecart == '0.0' || ecart == '0.0000'){ecart = 0; }
+
+								var ligne = "<tr><td>" + nom;
+								ligne += "<td>" + prenom;
+								ligne += "<td>" + pole;
+								ligne += "<td>" + bo;
+								ligne += "<td>" + arrondiOne(niveau);
+								ligne += "<td>" + nPlus;
+								ligne += "<td>" + ecart;
+								ligne += "<td><a href = '#'><i class='material-icons tooltipped' data-position='bottom' data-tooltip='Lien vers la fiche de cet agent, désactivé.'>search</i></a></td></tr>";
+								$("#table_agents_body").append("<tr>" + ligne + "</tr>"); 
+							}
+
+							$("#titre_popup").text("Sous domaine " + sousdomaine);
+							$("#cible").text("Attendu cible pour " + annee_sel);
+							});
+
+					instance.open();
+					$('.tooltipped').tooltip();
+				}
+				/////////////////////////////////////PEUPLE LES DIFFERENTS TABLEAUX HTML AVEC LES OBJETS REMPLIS PAR LES FONCTIONS CI-DESSUS////////////////////////////////////////////
+				function peupleQualif(obj1, obj2, obj3){
+					$("#body_tab_qualif").remove();
+					$("#tab_qualif").append("<tbody id='body_tab_qualif'></tbody>");
+					
+					var k = 1;
+					for(var mainprop in obj1){
+						$('#body_tab_qualif').append("<tr id=tab_qualif_ligne_" + k + "></tr>");
+						$("#tab_qualif_ligne_" + k).append("<td class='titrecol'>" + obj1[mainprop].firstcol + "</td>");
+						
+						var z = 1;
+						for(name in obj1[mainprop].noms){
+							$("#tab_qualif_ligne_" + k).append("<td class='td_tab_qualif" + z + "' style='text-align: center; '>" + obj1[mainprop].noms[name] + "</td>");
+
+							z++;
+						}
+
+						k++;
+					}
+					for(var mainprop in obj2){
+						$('#tab_qualif').append("<tr id=tab_qualif_ligne_" + k + "></tr>");
+						$("#tab_qualif_ligne_" + k).append("<td class='titrecol'>" + obj2[mainprop].col + "</td>");
+
+						z = 0; var isGreen = false;
+						for(var subprop in obj2[mainprop]){
+							if(subprop != "col"){
+								$("#tab_qualif_ligne_" + k).append("<td class='td_tab_qualif" + z + "' style='text-align: center; '>" + obj2[mainprop][subprop].nom + "</td>");
+								z++;
+							}
+
+						}
+						k++;
+					}
+					for(var mainprop in obj3){
+						$('#tab_qualif').append("<tr id=tab_qualif_ligne_" + k + "></tr>");
+						$("#tab_qualif_ligne_" + k).append("<td class='titrecol'>" + obj3[mainprop].col + "</td>");
+
+						z = 0; var isGreen = false;
+						for(var subprop in obj3[mainprop]){
+							if(subprop != "col"){
+								$("#tab_qualif_ligne_" + k).append("<td class='td_tab_qualif" + z + "' style='text-align: center; '>" + obj3[mainprop][subprop].nom + "</td>");
+								z++;
+							}
+
+						}
+
+						k++;
+					}
+
+					$("#trTitres").click(function(){
+						if(isClickedTabNiv){
+							$("#body_tab_niv").children().each(function(){
+								if($(this).css('background-color') != 'rgb(191, 232, 247)'){
+									$(this).hide();
+								}
+								else{
+									$(this).css('background-color', 'rgb(240, 240, 250)');
+								}
+							});
+							isClickedTabNiv = false;
+						}
+						else{
+							$("#body_tab_niv").children().each(function(){
+								if($(this).css('background-color') == 'rgb(240, 240, 250)'){
+									$(this).css('background-color', 'rgb(191, 232, 247)');
+									$(this).show();
+								}
+								else{
+									$(this).show();
+								}
+							});
+							isClickedTabNiv = true;
+						}
+					});
+
+					formate_rip_cdc();
+					formate_etoile(k);
+				}
+			/////////////////////FILTRE SUR TOUTES LES VALEURS DES FILTRES////////////////////////////////////////////////
+				function sort_by_all_filters() {
+					jQuery.ajaxSetup({async:false});
+
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").formSelect('getSelectedValues');
+
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+
+					var pole = false;
+					if(s_pole != "" && s_bo == ""){
+						pole = true;
+					}
+					
+					var s_agents = [];
+					var agent = "neant";
+					s_agents = $("#selectAgent").formSelect('getSelectedValues');
+					if(s_agents.length != 0){
+						if(s_agents[0] != ""){
+							agent = 'agent';
+						}
+					}
+
+					if(agent != 'agent'){
+						$.post("{{path('liste_agents_json')}}", {
+							objet: 'LISTE_AGENTS',
+							pole: s_pole_tab,
+							bo: s_bo,
+							profil: s_profil,
+							astreinte: s_astreinte
+						}, function (data_json) {
+							$("#selectAgent").empty();
+							$('#selectAgent').formSelect();
+							$("#selectAgent").append("<option value='' selected='selected'>Tous</option>");
+							for(var i = 0; i < data_json.length; i++){
+								$("#selectAgent").append("<option value='" + data_json[i]['nni'] + "'>" + data_json[i]['nom'] + " " + data_json[i]['prenom'] + "</option>");
+							}
+							$('#selectAgent').formSelect();
+						});
+					}           
+
+					if(pole && agent != 'agent') {
+						$('#selectBo').empty();
+						$('#selectBo').formSelect();
+						$('#selectBo').append("<option value='' selected='selected'>Toutes</option>");
+
+						var poleSelects = $("#selectPole").formSelect('getSelectedValues');
+
+						for(var i = 0; i < poleSelects.length; i++){
+							{% for polebo in poles_bos %}
+								var pole_var = "{{ polebo.pole }}";
+								var bo_var = "{{ polebo.bo }}";
+
+								var pole_select = poleSelects[i];
+
+								pole_var = pole_var.replace(/&amp;/g, '&');
+
+								if (pole_var == pole_select) {
+									$("#selectBo").append("<option value='" + bo_var + "'>" + bo_var + "</option>");
+								}
+								else if(pole_select == ""){
+									$("#selectBo").append("<option value='" + bo_var + "'>" + bo_var + "</option>");    
+								}
+							{% endfor %}
+						}
+						$('#selectBo').formSelect();
+					}
+
+					var dat = {};
+
+					$.post("{{path('filtre_tab_json')}}", {
+						objet: 'FILTRE_TAB',
+						pole: s_pole,
+						bo: s_bo,
+						profil: s_profil,
+						astreinte: s_astreinte,
+						agents: s_agents
+					}, function (data_json) {
+						var anneeUn = anneeEnCours + 1;
+						var anneeDeux = anneeEnCours + 2;
+						var anneeTrois = anneeEnCours + 3;
+
+						$("#tab_niv").remove();
+
+						$("#main_div").append("<table id='tab_niv'></table>");
+
+						$("#tab_niv").append("<thead id='thead_tab_niv'></thead>");
+
+						$("#thead_tab_niv").append("<tr id='trTitres' style='background-color: rgb(201, 228, 134); '></tr>");
+
+						$("#trTitres").append("<th id='col_dom'>Domaine</th>");
+						$("#trTitres").append("<th id='col_sdom'>Sous Domaine</th>");
+						$("#trTitres").append("<th id='col_nb_agents'>Nombre d'agents</th>");
+						$("#trTitres").append("<th id='col_niv'>Niveau MMS</th>");
+						$("#trTitres").append("<th id='col_n_plus_un'>Attendu cible en " + anneeUn + "</th>");
+						$("#trTitres").append("<th id='col_n_plus_deux'>Attendu cible en " + anneeDeux + "</th>");
+						$("#trTitres").append(" <th id='col_n_plus_trois'>Attendu cible en " + anneeTrois + "</th>");
+						$("#trTitres").append("<th id='col_ecart'>Ecart</th>");
+						$("#trTitres").append("<th id='col_search'><i class='material-icons'>search</i></th>");
+
+						$("#tab_niv").append("<tbody id='body_tab_niv'>");
+
+						var data = {}; 
+						data.labs = []; 
+						data.nb_agents = []; 
+						data.niveau = []; 
+						data.nPlusUn = []; 
+						data.nPlusDeux = []; 
+						data.nPlusTrois = [];
+						data.maille_supp = [];
+						data.domaine = [];
+						data.domaine_id = [];
+						var o = {};
+						o.domaine = ""; 
+						o.sousdomaine = ""; 
+						o.nb_agents = 0; 
+						o.niveau = 0; 
+						o.nPlusUn = 0; 
+						o.nPlusDeux = 0; 
+						o.nPlusTrois = 0;
+						o.sd_id = 0;
+						o.maille_supp = 0;
+						for(var i = 0; i < data_json[0].length; i++){
+							$("#body_tab_niv").append("<tr class='ligne_" + data_json[0][i]['domaine'] + "' id='ligne_tab_niv_" + i + "' style='background-color: rgb(246, 244, 242); '></tr>");
+							for(var prop in data_json[0][i]){
+								switch(prop) {
+									case 'domaine':
+										o.domaine = data_json[0][i][prop];
+										data.domaine.push(o.domaine);
+										break;
+									case 'sousdomaine':
+										o.sousdomaine = data_json[0][i][prop];
+										data.labs.push(o.sousdomaine);
+										break;
+									case 'nb_agents':
+										o.nb_agents = data_json[0][i][prop];
+										break;
+									case 'niveau':
+										o.niveau = data_json[0][i][prop];
+										if(o.niveau === null){o.niveau = 0; }
+										if(o.niveau === null){o.niveau = 0; }
+										if(o.niveau !== null && o.niveau != 0){o.niveau = arrondiOne(o.niveau); }
+										data.niveau.push(o.niveau);
+										break;
+									case 'nPlusUn':
+										o.nPlusUn = data_json[0][i][prop];
+										if(o.nPlusUn === null){o.nPlusUn = 0; }
+										if(o.nPlusUn !== null && o.nPlusUn != 0){o.nPlusUn = arrondiOne(o.nPlusUn); }
+										data.nPlusUn.push(o.nPlusUn);
+										break;
+									case 'nPlusDeux':
+										o.nPlusDeux = data_json[0][i][prop];
+										if(o.nPlusDeux === null){o.nPlusDeux = 0; }
+										if(o.nPlusDeux !== null && o.nPlusDeux != 0){o.nPlusDeux = arrondiOne(o.nPlusDeux); }
+										data.nPlusDeux.push(o.nPlusDeux);
+										break;
+									case 'nPlusTrois':
+										o.nPlusTrois = data_json[0][i][prop];
+										if(o.nPlusTrois === null){o.nPlusTrois = 0; }
+										if(o.nPlusTrois !== null && o.nPlusTrois != 0){o.nPlusTrois = arrondiOne(o.nPlusTrois); }
+										data.nPlusTrois.push(o.nPlusTrois);
+										break;
+									case 'sd_id':
+										o.sd_id = data_json[0][i][prop];
+										break;
+									case 'domaine_id':
+										data.domaine_id.push(data_json[0][i][prop]);
+										break;
+								} 
+							}
+							$("#ligne_tab_niv_" + i).append("<td class='domaine'>" + o.domaine + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td id='" + o.sd_id + "' class='sousdomaine'>" + o.sousdomaine + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='nb_agents'>" + o.nb_agents + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='niveau'>" + o.niveau + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='nPlusUn'>" + o.nPlusUn + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='nPlusDeux'>" + o.nPlusDeux + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='nPlusTrois'>" + o.nPlusTrois + "</td>");
+							$("#ligne_tab_niv_" + i).append("<td class='ecart'></td>");
+							$("#ligne_tab_niv_" + i).append("<td class='search'><a href='#' onclick='goSousDomaine(" + o.sd_id + "); '><i class='material-icons'>search</i></a></td>");
+						}
+						for(var i = 0; i < data_json[1].length; i++){
+							for(var prop in data_json[1][i]){
+								switch(prop) {
+									case 'niveau':
+										o.maille_supp = data_json[1][i][prop];
+										data.maille_supp.push(o.maille_supp);
+										break;
+								} 
+							}
+						}
+						calcul_ecart();
+						reformate();
+
+						var ctx_sdom = document.getElementById("graph_sousdomaines");
+						var titre_sdom = "Cartographie des compétences - Sous-domaines MMS";
+						var x_sdom = "graph_sousdomaines";
+
+						graph_radar_filtre(x_sdom, ctx_sdom, data, titre_sdom);
+					});
+					$.post("{{path('filtre_graph_json')}}", {
+						objet: 'FILTRE_GRAPH',
+						pole: s_pole,
+						bo: s_bo,
+						profil: s_profil,
+						astreinte: s_astreinte,
+						agents: s_agents
+					}, function (data_json) {
+						var data = {}; 
+						data.labs = []; 
+						data.nb_agents = []; 
+						data.niveau = []; 
+						data.nPlusUn = []; 
+						data.nPlusDeux = []; 
+						data.nPlusTrois = [];
+						data.maille_supp = [];
+						data.domaine = [];
+						data.domaine_id = [];
+						data.nb_agents = [];
+						var o = {};
+						o.domaine = ""; 
+						o.sousdomaine = ""; 
+						o.nb_agents = 0; 
+						o.niveau = 0; 
+						o.nPlusUn = 0; 
+						o.nPlusDeux = 0; 
+						o.nPlusTrois = 0;
+						o.sd_id = 0;
+						o.maille_supp = 0;
+						for(var i = 0; i < data_json[0].length; i++){
+							$("#body_tab_niv").append("<tr id='ligne_tab_niv_" + i + "'></tr>");
+							for(var prop in data_json[0][i]){
+								switch(prop) {
+									case 'domaine':
+										o.domaine = data_json[0][i][prop];
+										data.labs.push(o.domaine);
+										data.domaine.push(o.domaine);
+										break;
+									case 'nb_agents':
+										o.nb_agents = data_json[0][i][prop];
+										data.nb_agents.push(data_json[0][i][prop]);
+										break;
+									case 'niveau':
+										o.niveau = data_json[0][i][prop];
+										if(o.niveau === null){o.niveau = 0; }
+										if(o.niveau === null){o.niveau = 0; }
+										if(o.niveau !== null && o.niveau != 0){o.niveau = arrondiOne(o.niveau); }
+										data.niveau.push(o.niveau);
+										break;
+									case 'nPlusUn':
+										o.nPlusUn = data_json[0][i][prop];
+										if(o.nPlusUn === null){o.nPlusUn = 0; }
+										if(o.nPlusUn !== null && o.nPlusUn != 0){o.nPlusUn = arrondiOne(o.nPlusUn); }
+										data.nPlusUn.push(o.nPlusUn);
+										break;
+									case 'nPlusDeux':
+										o.nPlusDeux = data_json[0][i][prop];
+										if(o.nPlusDeux === null){o.nPlusDeux = 0; }
+										if(o.nPlusDeux !== null && o.nPlusDeux != 0){o.nPlusDeux = arrondiOne(o.nPlusDeux); }
+										data.nPlusDeux.push(o.nPlusDeux);
+										break;
+									case 'nPlusTrois':
+										o.nPlusTrois = data_json[0][i][prop];
+										if(o.nPlusTrois === null){o.nPlusTrois = 0; }
+										if(o.nPlusTrois !== null && o.nPlusTrois != 0){o.nPlusTrois = arrondiOne(o.nPlusTrois); }
+										data.nPlusTrois.push(o.nPlusTrois);
+										break;
+									case 'sd_id':
+										o.sd_id = domaine_id
+										break;
+									case 'domaine_id':
+										data.domaine_id.push(data_json[0][i][prop]);
+										break;
+								} 
+							}
+						}
+						for(var i = 0; i < data_json[1].length; i++){
+							for(var prop in data_json[1][i]){
+								switch(prop) {
+									case 'niveau':
+										o.maille_supp = data_json[1][i][prop];
+										data.maille_supp.push(o.maille_supp);
+										break;
+								} 
+							}
+						}
+
+						var ctx_dom = document.getElementById("graph_domaines");
+						var titre_dom = "Cartographie des compétences - Domaines MMS";
+						var x_dom = "graph_domaines";
+
+						graph_radar_filtre(x_dom, ctx_dom, data, titre_dom);
+						ajoute_domaines_after_start(data);
+			
+						make_tab_qualif();
+					});
+				}
+				/////////////////////////////////////RENSEIGNE LES OBJETS QUI SERVENT A REMPLIR LA TABLE QUALIF ET APPELLE LA FONCTION QUI REMPLIE CETTE TABLE////////
+				function make_tab_qualif(){
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_agents = [];
+					s_agents = $("#selectAgent").formSelect('getSelectedValues');
+
+					var s_bo = $("#selectBo").val();
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+
+					$.post("{{path('filtre_tab_qualif_json')}}", {
+						objet: 'FILTRE_GRAPH',
+						pole: s_pole,
+						bo: s_bo,
+						profil: s_profil,
+						astreinte: s_astreinte,
+						agents: s_agents
+					}, function (data_json) {
+						dats_uo.niveau = []; 
+						dats_uo.nb_agents = []; 
+						dats_uo.code = [];
+
+						dats_uo.nb_agent_astreinte = 0;
+						dats_uo.nb_agent_prv = 0;
+						dats_uo.nb_agent_pst = 0;
+
+						for(var i = 0; i < data_json.length; i++){
+							dats_uo.niveau.push(data_json[i].niveau);
+							dats_uo.nb_agents.push(data_json[i].nb_agents);
+							dats_uo.code.push(data_json[i].uo_code);
+						}
+						 dats_uo.nb_agent_astreinte = data_json['nb_agent_astreinte'][0]['nb_agents'];
+						 dats_uo.nb_agent_prv = data_json['prv'][0]['nb_agents'];
+						 dats_uo.nb_agent_pst = data_json['pst'][0]['nb_agents'];
+					});
+					peuple_table_qualif();
+			
+			   var regex = /undefined/gi;
+			   $("#body_tab_qualif").children().each(function(){
+				$(this).children().each(function(){
+					$(this).text($(this).text().replace(regex, '0'));
+				});
+			   });
+				}
+				/////////////////////////////////////AJOUTE LES LIGNES DOMAINES AU PREMIER TABLEAU////////////////////////////////////////////
+				function ajoute_domaines(){
+					var k = 0;
+					var the_doms = [];
+					the_doms[0] = "Domaine";
+					$("#tab_niv tr").each(function () {
+						if (k > 0) {
+							var the_dom = $(this).children().first().text();
+							var the_dom_av = $(this).prev().children().first().text();
+
+							if (the_dom != the_dom_av) {
+								{% for rs in rslt_dom %}
+									if ("{{ rs.domaine }}" == the_dom) {
+										var n2 = arrondiOne({{ rs.nPlusDeux }});
+										var n3 = arrondiOne({{ rs.nPlusTrois }});
+										var n1 = arrondiOne({{ rs.nPlusUn }});
+										var n = arrondiOne({{ rs.niveau }});
+
+										var nb_agents = {{ rs.nb_agents }};
+										var domaine_id = '{{ rs.domaine_id }}';
+										var domaine_nom = '{{ rs.domaine }}';
+
+										var lecart = n1 - n;
+										lecart = arrondiOne(lecart);
+										if(isNaN(lecart)){lecart = "0";}
+										if(isNaN(n)){n = "0";}
+										if(isNaN(n1)){n1 = "0";}
+										if(isNaN(n2)){n2 = "0";}
+										if(isNaN(n3)){n3 = "0";}
+										if(lecart < 0){lecart = "";}
+										if(lecart == 0 && n1 == 0){
+											lecart = "";
+										}
+
+										var insertBefore = "<tr name='" + the_dom + "'><th>" + the_dom + "</th><th>Tous</th><th class='nb_agents'>" + nb_agents + "</th><th class='niveau'>" + n + "</th>";
+										insertBefore += "<th class='nPlusUn' contenteditable='false'>" + n1 + "</th><th class='nPlusDeux' contenteditable='false'>" + n2;
+										insertBefore += "</th><th class='nPlusTrois' contenteditable='false'>" + n3 + "</th><th class='ecart'>" + lecart + "</th>";
+										insertBefore += "<th class='search'><a href='#' onclick='goDomaine(" + domaine_id + "); '><i class='material-icons'>search</i></a></th></tr>";
+
+										$(this).before(insertBefore);
+
+										$(this).prev().css('background-color', enedis.couleurs.secondaire.bleu.Clair);
+										$(this).prev().css('color', enedis.couleurs.secondaire.marron.Median);
+
+										$("tr[name = '" + the_dom + "']").click(function(evt){
+											if(evt.target.firstChild.nodeValue != 'search'){
+												var cl_doms = the_dom.split(" ");
+												var cl_dom = cl_doms[0];                                                                                                                        
+
+												if($(".ligne_" + cl_dom).css('display') != 'none'){
+													$(".ligne_" + cl_dom).css('display', 'none');
+												}
+												else{
+													$(".ligne_" + cl_dom).css('display', '');
+												}
+												if($(this).css('background-color') == 'rgb(240, 240, 250)'){
+													$(this).css('background-color', 'rgb(191, 232, 247)');
+												}
+											}
+										});
+									}
+								{% endfor %}
+							}
+						}
+						k++;
+					});
+				}
+				/////////////////////////////////////AJOUTE LES LIGNES DOMAINES AU PREMIER TABLEAU APRES CHOIX SUR UN FILTRE////////////////////////////////////////////
+				function ajoute_domaines_after_start(o){
+					var k = 0;
+					var the_doms = [];
+					the_doms[0] = "Domaine";
+					$("#tab_niv tr").each(function () {
+						if($(this).css('background-color') == 'rgb(191, 232, 247)'){
+							$(this).remove();
+						}
+					});
+
+					$("#tab_niv tr").each(function () {
+						var this_id = "#" + $(this).attr('id');
+						if (k > 0) {
+							var the_dom = $(this_id).children().first().text();
+							var the_dom_av = $(this_id).prev().children().first().text();
+
+							if (the_dom != the_dom_av) {
+								for(var z = 0; z < o.domaine.length; z++){
+									if (o.domaine[z] == the_dom) {
+										var n2 = arrondiOne(o.nPlusDeux[z]);
+										var n3 = arrondiOne(o.nPlusTrois[z]);
+										var n1 = arrondiOne(o.nPlusUn[z]);
+										var n = arrondiOne(o.niveau[z]);
+
+										var nb_agents = o.nb_agents[z];
+										var domaine_id = o.domaine_id[z];
+										var domaine_nom = o.domaine[z];
+
+										var lecart = n1 - n;
+										lecart = arrondiOne(lecart);
+										if(isNaN(lecart)){lecart = "0";}
+										if(isNaN(n)){n = "0";}
+										if(isNaN(n1)){n1 = "0";}
+										if(isNaN(n2)){n2 = "0";}
+										if(isNaN(n3)){n3 = "0";}
+										if(lecart < 0){lecart = "";}
+										if(lecart == 0 && n1 == 0){
+											lecart = "";
+										}
+
+										var insertBefore = "<tr name='" + the_dom + "'><th>" + the_dom + "</th><th>Tous</th><th class='nb_agents'>" + nb_agents + "</th><th class='niveau'>" + n + "</th>";
+										insertBefore += "<th class='nPlusUn' contenteditable='false'>" + n1 + "</th><th class='nPlusDeux' contenteditable='false'>" + n2;
+										insertBefore += "</th><th class='nPlusTrois' contenteditable='false'>" + n3 + "</th><th class='ecart'>" + lecart + "</th>";
+										insertBefore += "<th class='search'><a href='#' onclick='goDomaine(" + domaine_id + "); '><i class='material-icons'>search</i></a></th></tr>";
+
+										$(this_id).before(insertBefore);
+
+										$(this_id).prev().css('background-color', enedis.couleurs.secondaire.bleu.Clair);
+										$(this_id).prev().css('color', enedis.couleurs.secondaire.marron.Median);
+
+										$("tr[name = '" + the_dom + "']").click(function(evt){
+											if(evt.target.firstChild.nodeValue != 'search'){
+												var cl_doms = the_dom.split(" ");
+												var cl_dom = cl_doms[0];
+
+												if($(".ligne_" + cl_dom).css('display') != 'none'){
+													$(".ligne_" + cl_dom).css('display', 'none');
+												}
+												else{
+													$(".ligne_" + cl_dom).css('display', '');
+												}
+
+												if($(this).css('background-color') == 'rgb(240, 240, 250)'){
+													$(this).css('background-color', 'rgb(191, 232, 247)');
+												}
+											}
+										});
+										break;
+									}
+								}
+							}
+						}
+						k++;
+					});
+				}
+				/////////////////////////////////////REMPLI ET OUVRE LE POPUP DES DOMAINES / SOUSDOMAINES QUAND CLIQUE SUR UN DOMAINE////////////////////////////////////
+				function goDomaine(d_id){
+					var elem = document.querySelector('#myModal');
+					var instance = M.Modal.getInstance(elem);
+
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+					var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+					var s_d_id = d_id;
+
+					var agents_size = s_agents.length;
+
+					if(agents_size == 0){
+						$path  = "{{path('popup_tab_domaine_json_no_agent')}}";
+					}
+					else{
+						if(s_agents[0] == ""){
+							$path  = "{{path('popup_tab_domaine_json_no_agent')}}";
+						}
+						else{
+							$path  = "{{path('popup_tab_domaine_json_agent')}}";
+						}
+					}
+
+					var annee_sel = $("input:radio[name ='choix_annee']:checked").val();
+					var difference = annee_sel - anneeEnCours;
+
+					var domaine = "";
+
+					$.post($path, {
+								objet: 'POPUP_DOM_TAB',
+								pole: s_pole,
+								bo: s_bo,
+								profil: s_profil,
+								astreinte: s_astreinte,
+								agents: s_agents,
+								d_id: s_d_id
+							}, 
+							function (data_json) {
+							$("#table_agents_body").remove(); 
+							$("#table_agents").append("<tbody id='table_agents_body'></tbody>");
+
+							for(var i = 0; i < data_json.length; i++){
+								var nPlus = 0;
+								var nom = data_json[i].nom; 
+								var prenom = data_json[i].prenom; 
+								var pole = data_json[i].pole; 
+								var bo = data_json[i].bo; 
+								var niveau = data_json[i].niveau; 
+								var ag_id = data_json[i].agent_id;
+
+								if(i == 0){domaine = data_json[i].domaine; } 
+
+								if (difference == 1) {
+									var nPlus = arrondiOne(data_json[i].nPlusUn);
+								} else if (difference == 2) {
+									var nPlus = arrondiOne(data_json[i].nPlusDeu);
+								} else if (difference == 3) {
+									var nPlus = arrondiOne(data_json[i].nPlusTrois);
+								}
+
+								if(isNaN(nPlus)){nPlus = 0; }  
+
+								var ecart = arrondiOne(nPlus - niveau);
+
+								if(ecart < 0 || isNaN(ecart) || ecart == '0.0' || ecart == '0.0000'){ecart = 0; }
+
+								var ligne = "<tr><td>" + nom;
+								ligne += "<td>" + prenom;
+								ligne += "<td>" + pole;
+								ligne += "<td>" + bo;
+								ligne += "<td>" + arrondiOne(niveau);
+								ligne += "<td>" + nPlus;
+								ligne += "<td>" + ecart;
+								ligne += "<td><a href = '#'><i class='material-icons tooltipped' data-position='bottom' data-tooltip='Lien vers la fiche de cet agent, désactivé.'>search</i></a></td></tr>";
+								$("#table_agents_body").append("<tr>" + ligne + "</tr>"); 
+							}
+
+							$("#titre_popup").text("Domaine " + domaine);
+							$("#cible").text("Attendu cible pour " + annee_sel);
+
+						});
+
+					$('.tooltipped').tooltip();
+					instance.open();
+				}
+				/////////////////////////////////////SUPPRIME LES ZEROS APRES LA VIRGULE////////////////////////////////////
+				function reformate(){
+					$("#body_tab_niv").children().each(function(){
+						$(this).children().each(function(){
+							var val = $(this).text();
+							if(val == '0.0000'){
+								$(this).text(0);
+							}
+						});
+					});
+				}
+				/////////////////////////////////////ECRIT CORRECTEMENT UNE HABILITATIONS PAR EXEMPLE EN COMMENCANT PAR UO////
+				function makeHab(uo){
+					/*if(isNaN(uo)){
+						if(uo.substring(uo.length - 1) == "E"){
+							var hab = uo;
+						}
+						else{
+							var hab = "UO" + uo;
+						}
+					}
+					else{
+						if(uo <= 9){
+							var hab = "UO00" + uo; 
+						}
+						else if(uo <= 99){
+							var hab = "UO0" + uo; 
+						}
+						else{
+							var hab = "UO" + uo; 
+						}
+						
+						if(uo == 60 || uo == 1 || uo == 1001 || uo == 1002 || uo == 1004 || uo == 1009 || uo == 1018 || uo == 1022 || uo == 1024 || uo == 1025 || uo == 1026 || 
+						uo == 1028 || uo == 1029 || uo == 1031 || uo == 1037 || uo == 1044 || uo == 1053 || uo == 1055 || uo == 1062 || uo == 1069 || uo == 1070 || 
+						uo == 1071 || uo == 1074 || uo == 1076 || uo == 1129 || uo == 2 || uo == 3 || uo == 4 || uo == 5 || uo == 500 || uo == 6 || uo == 60 || uo == 7 || uo == 70 || 
+						uo == 8 || uo == 9 || uo == 999){
+						var hab = uo;
+						}
+					}
+
+					if(uo == 600){var hab = "UO060";}
+
+					if(typeof(hab) == "undefined"){console.log(uo);}
+					return hab;*/
+					
+					return uo;
+				}
+
+				/////////////////////////////////////RETOURNE LE NIVEAU MINIMUM D'UNE HABILITATION////////////////////////////////////
+				function peuple_tab_qualif(nom_hab){
+					var nivs = [];
+					for(i = 0; i < dats_uo.code.length; i++){
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var uo = habilitations[nom_hab]['uos'][j];
+
+							hab = makeHab(uo);    
+
+							if(dats_uo.code[i] == hab){
+								if(dats_uo.niveau[i] > 0){
+									nivs.push(parseInt(dats_uo.niveau[i]));
+								}
+							}    
+						}
+					}
+
+					var niveau = Math.min.apply(null, nivs);
+					if(niveau == "Infinity"){niveau = 0;}
+
+					return niveau;
+				}
+				/////////////////////////////////////RETOURNE LE NIVEAU MINIMUM D'UNE HABILITATION////////////////////////////////////
+				function peuple_tab_qualif_all_agents(nom_hab){
+					for(i = 0; i < agents_uos.length; i++){
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var uo = habilitations[nom_hab]['uos'][j];
+
+							hab = makeHab(uo);
+
+							if(dats_uo.code[i] == hab){
+								if(dats_uo.niveau[i] > 0){
+									nivs.push(parseInt(dats_uo.niveau[i]));
+								}
+							}
+						}
+					}
+					var nivs = [];
+					for(i = 0; i < dats_uo.code.length; i++){
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var uo = habilitations[nom_hab]['uos'][j];
+
+							hab = makeHab(uo);    
+
+							if(dats_uo.code[i] == hab){
+								if(dats_uo.niveau[i] > 0){
+									nivs.push(parseInt(dats_uo.niveau[i]));
+								}
+							}    
+						}
+					}
+
+					var niveau = Math.min.apply(null, nivs);
+					if(niveau == "Infinity"){niveau = 0;}
+
+					return niveau;
+				}
+				/////////////////////////////////////RETOURNE TRUE OU FALSE SELON QUE L'HABILITATION EN ATTRIBUT CORRESPONDE A UN COMPAGNON PST//////////////
+				function isPst(nom_hab){
+					var nivs = [];
+					for(i = 0; i < dats_uo.code.length; i++){
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var hab = "UO" + habilitations[nom_hab]['uos'][j];
+							if(dats_uo.code[i] == hab){
+								if(parseInt(dats_uo.niveau[i]) == 4){
+									compagnonPST = true;
+									return true;
+								}    
+							}    
+						}
+					}
+
+					return false;
+				}
+				/////////////////////////////////////RETOURNE TRUE OU FALSE SELON QUE L'HABILITATION EN ATTRIBUT SOIT OU NON VALIDEE PAR L'AGENT//////////////////////
+				function peuple_tab_qualif_etoile(nom_hab){
+					var nivs = []; var isGood = true; var isFinds = [];
+					
+					try{
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var isFind = false;
+							for(i = 0; i < dats_uo.code.length; i++){
+								var nb_etoiles = parseInt(habilitations[nom_hab]['etoiles'][j]);
+								var uo = habilitations[nom_hab]['uos'][j];
+
+								hab = makeHab(uo);
+
+								if(hab ==  dats_uo.code[i]){
+									isFind = true;
+									if(dats_uo.niveau[i] < nb_etoiles){
+										isGood = false;
+									}
+								}    
+							}
+							if(isFind){
+								isFinds.push(0);
+							}
+							else{
+								isFinds.push(1);
+							}
+						}
+						
+						var result = 0;
+						for(i = 0; i < isFinds.length; i++){
+							result = result + isFinds[i];
+						}
+
+						if(result != 0){isGood = false;}
+
+						return isGood;
+					}
+					catch(error){
+						console.log(nom_hab);
+						console.log(uo);
+						console.log(uo.charAt(uo.length - 1));
+						console.log(typeof(uo));
+						console.log(error);
+						return 0;
+					}
+					
+				}
+				///////////POUR UNE HABILITATION CONSTITUEE D'UNE SULE UO : RETOURNE TRUE OU FALSE SELON QUE L'HABILITATION EN ATTRIBUT SOIT OU NON VALIDEE PAR L'AGENT//////////////////////
+				function peuple_tab_qualif_etoile_one_condition(nom_hab){
+					var nivs = []; var isGood = false; 
+					try{
+						for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+							var isFind = false;
+							for(i = 0; i < dats_uo.code.length; i++){
+								var nb_etoiles = parseInt(habilitations[nom_hab]['etoiles'][j]);
+								var uo = habilitations[nom_hab]['uos'][j];
+
+								hab = makeHab(uo);
+
+								if(hab ==  dats_uo.code[i]){
+									if(dats_uo.niveau[i] >= nb_etoiles){
+										isGood = true;
+									}
+								}    
+							}
+						}
+
+						return isGood;
+					}
+					catch(error){
+						console.log(nom_hab);
+						console.log(uo);
+						console.log(uo.charAt(uo.length - 1));
+						console.log(typeof(uo));
+						console.log(error);
+						return 0;
+					}
+					
+				}
+				///////////POUR UNE HABILITATION PRV : RETOURNE TRUE OU FALSE SELON QUE L'HABILITATION EN ATTRIBUT SOIT OU NON VALIDEE PAR L'AGENT//////////////////////
+				function peuple_tab_qualif_etoile_prv(nom_hab){
+					var nivs = []; var isGood = false; var isFind = false;
+					
+					try{
+						for(i = 0; i < dats_uo.code.length; i++){
+							for(var j = 0; j < habilitations[nom_hab]['uos'].length; j++){
+								var nb_etoiles = parseInt(habilitations[nom_hab]['etoiles'][j]);
+								var uo = habilitations[nom_hab]['uos'][j];
+
+							hab = makeHab(uo);
+
+								if(dats_uo.code[i] == hab){
+									isFind = true;
+									if(dats_uo.niveau[i] >= nb_etoiles){
+										isGood = true;
+									}
+								}    
+							}
+						}
+
+						if(isFind == false){isGood = false;}
+
+						return isGood;
+					}
+					catch(error){
+						console.log(nom_hab);
+						console.log(uo);
+						console.log(uo.charAt(uo.length - 1));
+						console.log(typeof(uo));
+						console.log(error);
+						return 0;
+					}
+					
+				}
+				///////////MISE A JOUR DE LA LISTE EN PREMIER PARAMETRE AVEC LE TABLEAU DE VALEUR EN DEUXIEME PARAMETRE//////////////////////
+				function maj_listDom(liste_maj, val) {
+					$("#" + liste_maj).empty(); //Vide les données du menu déroulant objet
+					$("#" + liste_maj).append("<option value='Tous'>Tous</option>");
+
+					//Peuplement de la liste en paramètre de la fonction
+					for (var i in val) {
+						$("#" + liste_maj).append("<option value='" + val[i] + "'>" + val[i] + "</option>");
+					}
+				}
+				///////////MISE A JOUR DES GRAPHS SUITE A CHANGEMENT DE DOMAINE//////////////////////
+				$("#domaine_select").change(function () {
+					var domaineSelect = $(this).val();
+					if(domaineSelect == 'Tous' || domaineSelect == 'tous' || domaineSelect == 'TOUS'){domaineSelect = ''; }
+
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+					var s_profil = $("#selectProfil").val();
+					var s_astreinte = $("#selectAstreinte").val();
+
+					var s_agents = $("#selectAgent").formSelect('getSelectedValues');
+					var agents_size = s_agents.length;
+					if(agents_size == 0){
+						$path  = "{{path('filtre_grah_dom_no_agent_json')}}";
+					}
+					else{
+						if(s_agents[0] == ""){
+							$path  = "{{path('filtre_grah_dom_no_agent_json')}}";
+						}
+						else{
+							$path  = "{{path('filtre_grah_dom_agent_json')}}";
+						}
+					}
+					
+					var new_aie_sdats = {};
+					new_aie_sdats.labs = [];
+					new_aie_sdats.niveau = [];
+					new_aie_sdats.nPlusUn = [];
+					new_aie_sdats.nPlusDeux = [];
+					new_aie_sdats.nPlusTrois = [];
+					new_aie_sdats.maille_supp = [];
+
+					$.post($path, {
+						objet: 'GRAPH_DOM',
+						pole: s_pole,
+						bo: s_bo,
+						profil: s_profil,
+						astreinte: s_astreinte,
+						agents: s_agents,
+						domaine: domaineSelect
+						}, function (data_json) {
+						for(var i = 0; i < data_json[0].length; i++){ 
+							new_aie_sdats.niveau.push(data_json[0][i]['niveau']);
+							new_aie_sdats.nPlusUn.push(data_json[0][i]['nPlusUn']);
+							new_aie_sdats.nPlusDeux.push(data_json[0][i]['nPlusDeux']);
+							new_aie_sdats.nPlusTrois.push(data_json[0][i]['nPlusTrois']);
+							new_aie_sdats.labs.push(data_json[0][i]['sousdomaine']);
+						}
+						for(var i = 0; i < data_json[1].length; i++){ 
+							new_aie_sdats.maille_supp.push(data_json[1][i]['niveau']);
+						}
+					}); 
+			
+					var ctx_sdom = document.getElementById("graph_sousdomaines");
+					var titre_sdom = "Cartographie des compétences - Sous-domaines MMS";
+					var x_sdom = "graph_sousdomaines";
+
+					if(!isMailleSupp()){
+						if(new_aie_sdats.labs.length > 2){
+							graph_radar(x_sdom, ctx_sdom, new_aie_sdats, titre_sdom);
+						}
+						else{
+							graph_bar(x_sdom, ctx_sdom, new_aie_sdats, titre_sdom);
+						}
+					}
+					else{
+						if(new_aie_sdats.labs.length > 2){
+							graph_radar_filtre(x_sdom, ctx_sdom, new_aie_sdats, titre_sdom);
+						}
+						else{
+							graph_bar_filtre(x_sdom, ctx_sdom, new_aie_sdats, titre_sdom);
+						}
+					}
+				});
+				///////////RETOURNE TRUE OU FALSE SELON QU'UN FILTRE SOIT SELECTIONNE OU NON//////////////////////
+				function isFiltre(){
+					var $pole = $("#selectPole").val();
+					var $bo = $("#selectBo").val();
+					var $profil = $("#selectProfil").val();
+					var $astreinte = $("#selectAstreinte").val();
+
+					if($pole != '' || $bo != '' || $profil != '' || $astreinte != ''){
+						return true;
+					}
+					
+					return false;
+				}
+				///////////RETOURNE TRUE OU FALSE SELON LA PRESENCE D'UNE MAILLE SUPERIEURE A CELLE CHOISIE (EX : POLE POUR BO)///////////////
+				function isMailleSupp(){
+					var $pole = $("#selectPole").val();
+					var $bo = $("#selectBo").val();
+
+					if($pole != '' || $bo != ''){
+						return true;
+					}
+					
+					return false;
+				}
+
+				//////////////////////////////////////////MAJ DE LA BASE DE DONNEES APRES EVENEMENT CONTENT EDITABLE//////////////////////////
+				$('[contenteditable=true]').focus(function () {
+					$(this).data("initialText", $(this).html());
+				});
+				$('[contenteditable=true]').blur(function () {
+					if ($(this).data("initialText") !== $(this).html()) {
+						var new_value = $(this).text();
+						var id = $(this).parent().attr("id");
+
+						var ids = id.split("**//**");
+
+						var a_id = ids[0];
+						var s_id = ids[1];
+						var colonne = $(this).attr("class");
+
+						var level = $(this).parent().children('.niveau').text();
+
+						if(value_valid(new_value, level)){
+							//change_val_table(a_id, s_id, new_value, colonne);
+						}
+						else{
+							level++;
+							$(this).text($(this).data("initialText"));
+							alert("Veuillez renseigner un nombre supérieur ou égal au niveau, et compris entre 1 et 4.");
+							$('html').focusin();
+						}
+					}
+				});
+				///////////VERIFIE LA VALIDITE DE LA NOUVELLE VALEUR RRENSEIGNEE PAR L'UTILISATEUR//////////////////////
+				function value_valid(new_val, niveau){
+					if(!isNaN(new_val) && new_val >= niveau && new_val < 5 && new_val > 0){
+						return true;
+					}
+					return false;
+				}
+				///////////MISE A JOUR DE LA BASE AVEC LA NOUVELLE VALEUR VAL, POUR LA COLONNE THE_COL, ET LES ID AGENT ET SOUS DOMAINES//////
+				function change_val_table(ag_id, sousd_id, val, the_col) {
+					$.post("{{path('update_tab_json')}}", {
+						objet: 'UPDATE_UO_AGENT',
+						agent_id: ag_id,
+						sd_id: sousd_id,
+						new_val: val,
+						col: the_col
+					}, function (data_json) {});
+				}
+
+				$("input[name=choix_annee]").change(function () {
+					var annee_select = $("input:radio[name ='choix_annee']:checked").val();
+					var diff = annee_select - anneeEnCours;
+					var num_col = 1;
+
+					if (diff == 1) {
+						num_col = 3;
+						cl = '.nPlusUn';
+					} else if (diff == 2) {
+						num_col = 4;
+						cl = '.nPlusDeux';
+					} else if (diff == 3) {
+						num_col = 5;
+						cl = '.nPlusTrois';
+					}
+					
+					calcul_ecart();
+				});
+				///////////PARCOURS LE PREMIER TABLEAU HTML ET CALCUL PUIS ECRIT L'ECART ENTRE  LE NIVEAU ET L'ANNEE CIBLE CHOISIE//////////////////////
+				function calcul_ecart(){
+					var annee_sel = $("input:radio[name ='choix_annee']:checked").val();
+					var difference = annee_sel - anneeEnCours;
+
+					if (difference == 1) {
+						cl = '.nPlusUn';
+					} else if (difference == 2) {
+						cl = '.nPlusDeux';
+					} else if (difference == 3) {
+						cl = '.nPlusTrois';
+					}
+
+					var k = 0;
+					$('tr').each(function () {
+						if (k > 0) {
+							var valNiv = arrondiOne($(this).children('.niveau').text());
+							var val_nPlus = arrondiOne($(this).children(cl).text());
+
+							var ecart = arrondiOne(val_nPlus - valNiv);
+							if(isNaN(ecart) || ecart < 0){ecart = "";}
+							$(this).children('.ecart').text("");
+							$(this).children('.ecart').text(ecart);
+						}
+						k++;
+					});
+					$("tr").each(function(){
+						$(this).children().each(function(){
+							var txt = $(this).text();
+							if(txt == "0.0" || txt == "0.00"){
+								$(this).text("0");
+							}
+							else if(txt.substr(txt.length - 2, txt.length - 1) == ".0"){
+								$(this).text(txt.substr(0, txt.length - 2));    
+							}
+						});
+					});
+				}
+				///////////FONCTIONS D'ARRONDISSEMENT//////////////////////
+				function arrondiTwo(x) {
+					return Number.parseFloat(x).toFixed(2);
+				}
+				function arrondiOne(x) {
+					return Number.parseFloat(x).toFixed(1);
+				}
+				function arrondiZero(x) {
+					return Number.parseFloat(x).toFixed(0);
+				}
+				///////////FONCTIONS GRAPHIQUES//////////////////////
+				var coul_bo = "rgb(255, 69, 0, 1)";
+				var coul_niv = "rgb(49, 255, 100, 1)";
+				var coul_n_plus_un = "Aqua";
+				var coul_n_plus_deux = "MediumSlateBlue";
+				var coul_n_plus_trois = "DarkBlue";
+				function graph_radar(x, context, donnees, titre) {
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+
+					var maille = ' AIE ';
+
+					donnees.min = [4];
+					var data = {
+						labels: donnees.labs,
+						datasets: [
+							{
+								label: "Niveau" + maille + "en " + anneeEnCours,
+								fill: false,
+								backgroundColor: coul_niv,
+								borderColor: coul_niv,
+								data: donnees.niveau
+							}, {
+								label: "Attendu " + annee_nPlusUn,
+								fill: false,
+								backgroundColor: coul_n_plus_un,
+								borderColor: coul_n_plus_un,
+								data: donnees.nPlusUn
+							}, {
+								label: "Attendu " + annee_nPlusDeux,
+								fill: false,
+								backgroundColor: coul_n_plus_deux,
+								borderColor: coul_n_plus_deux,
+								data: donnees.nPlusDeux
+							}, {
+								label: "Attendu " + annee_nPlusTrois,
+								fill: false,
+								backgroundColor: coul_n_plus_trois,
+								borderColor: coul_n_plus_trois,
+								data: donnees.nPlusTrois
+							},{
+								label: "",
+								fill: false,
+								backgroundColor: 'rgba(0, 0, 0, 0)',
+								borderColor: 'rgba(0, 0, 0, 0)',
+								data: donnees.min
+							}
+						]
+					};
+					var options = {
+						title: {
+							display: true,
+							text: titre,
+							fontSize: 20
+						},
+						scale: {
+							xAxes: 
+							[
+								{
+									display: true,
+									ticks: {
+										fontSize: 14,
+										min: 0,
+										max: 4,
+										fontFamily: "ubuntu"
+									},
+									scaleLabel: {
+										display: true
+									}
+								}
+							],
+							yAxes: 
+							[
+								{
+									ticks: {
+										beginAtZero: true,
+										min: 0,
+										max: 4,
+										fontSize: 14,
+										fontFamily: "ubuntu"
+									}
+								}
+							],
+							ticks: {
+								beginAtZero: true
+							}
+						},
+						maintainAspectRatio: true,
+						spanGaps: false,
+						elements: {
+							line: {
+								tension: 0.000001
+							}
+						}
+					};
+
+					if (typeof(myRadarChart[x]) != "undefined") {
+						myRadarChart[x].destroy();
+					}
+
+					myRadarChart[x] = new Chart(context, {
+						type: 'radar',
+						data: data,
+						options: options
+					});
+				}
+				function graph_radar_filtre(x, context, donnees, titre) {
+					//alert('graph radar AVEC FILTRE !!!');
+					
+					var s_pole_tab = $("#selectPole").formSelect('getSelectedValues');
+					var s_pole = "";
+					s_pole = s_pole_tab;
+
+					var s_bo = $("#selectBo").val();
+
+					$("#titre_partie2").text('Graphiques des compétences');
+					var maille_supp = ' AIE ';
+					var maille = ' du pôle ';
+					if(s_bo != ''){
+						maille_supp = ' du pôle ';
+						maille = ' de la B.O. ';
+
+						//$("#titre_partie2").text('Graphiques des compétences - B.O. de ' + s_bo);
+					}
+					else if(s_pole != ''){
+						//$("#titre_partie2").text('Graphiques des compétences - pôle ' + s_pole);
+					}
+
+					donnees.min = [4];
+					var data = {
+						labels: donnees.labs,
+						datasets: [
+							{
+								label: "Niveau" + maille + "en " + anneeEnCours,
+								fill: false,
+								backgroundColor: coul_niv,
+								borderColor: coul_niv,
+								data: donnees.niveau
+							}, {
+								label: "Niveau" + maille_supp + "en " + anneeEnCours,
+								fill: false,
+								backgroundColor: coul_bo,
+								borderColor: coul_bo,
+								data: donnees.maille_supp
+							}, {
+								label: "Attendu " + annee_nPlusUn,
+								fill: false,
+								backgroundColor: coul_n_plus_un,
+								borderColor: coul_n_plus_un,
+								data: donnees.nPlusUn
+							}, {
+								label: "Attendu " + annee_nPlusDeux,
+								fill: false,
+								backgroundColor: coul_n_plus_deux,
+								borderColor: coul_n_plus_deux,
+								data: donnees.nPlusDeux
+							}, {
+								label: "Attendu " + annee_nPlusTrois,
+								fill: false,
+								backgroundColor: coul_n_plus_trois,
+								borderColor: coul_n_plus_trois,
+								data: donnees.nPlusTrois
+							},{
+								label: "",
+								fill: false,
+								backgroundColor: 'rgba(0, 0, 0, 0)',
+								borderColor: 'rgba(0, 0, 0, 0)',
+								data: donnees.min
+							}
+						]
+					};
+					var options = {
+						title: {
+							display: true,
+							text: titre,
+							fontSize: 20
+						},
+						scale: {
+							xAxes: 
+							[
+								{
+									display: true,
+									ticks: {
+										fontSize: 14,
+										min: 0,
+										max: 4,
+										fontFamily: "ubuntu"
+									},
+									scaleLabel: {
+										display: true
+									}
+								}
+							],
+							yAxes: 
+							[
+								{
+									ticks: {
+										beginAtZero: true,
+										min: 0,
+										max: 4,
+										fontSize: 14,
+										fontFamily: "ubuntu"
+									}
+								}
+							],
+							ticks: {
+								beginAtZero: true
+							}
+						},
+						maintainAspectRatio: true,
+						spanGaps: false,
+						elements: {
+							line: {
+								tension: 0.000001
+							}
+						}
+					};
+
+					if (typeof(myRadarChart[x]) != "undefined") {
+						myRadarChart[x].destroy();
+					}
+
+					myRadarChart[x] = new Chart(context, {
+						type: 'radar',
+						data: data,
+						options: options
+					});
+				}
+				function graph_bar(x, context, donnees, titre) {
+					donnees.min = [4];
+
+					var data = {
+						labels: donnees.labs,
+						datasets: [
+							{
+								label: "Niveau AIE en " + anneeEnCours,
+								backgroundColor: coul_niv,
+								borderColor: coul_niv,
+								data: donnees.niveau
+							}, {
+								label: "Attendu " + annee_nPlusUn,
+								backgroundColor: coul_n_plus_un,
+								borderColor: coul_n_plus_un,
+								data: donnees.nPlusUn
+							}, {
+								label: "Attendu " + annee_nPlusDeux,
+								backgroundColor: coul_n_plus_deux,
+								borderColor: coul_n_plus_deux,
+								data: donnees.nPlusDeux
+							}, {
+								label: "Attendu " + annee_nPlusTrois,
+								backgroundColor: coul_n_plus_trois,
+								borderColor: coul_n_plus_trois,
+								data: donnees.nPlusTrois
+							},{
+								label: "",
+								backgroundColor: 'rgba(0, 0, 0, 0)',
+								borderColor: 'rgba(0, 0, 0, 0)',
+								data: donnees.min
+							}
+						]
+					};
+					var options = {
+						title: {
+							display: true,
+							text: titre,
+							fontSize: 20
+						},
+						scale: {
+							ticks: {
+								beginAtZero: true
+							}
+						},
+						scales: {
+							xAxes: [
+								{
+									stacked: false,
+									ticks: 
+									{
+										min: 0,
+										max: 4
+									}
+								}
+							],
+							yAxes: [
+								{
+									stacked: false,
+									ticks: 
+									{
+										min: 0,
+										max: 4
+									}
+								}
+							]
+						},
+						maintainAspectRatio: true,
+						spanGaps: false,
+						elements: {
+							line: {
+								tension: 0.000001
+							}
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							},
+							'samples-filler-analyser': {
+								target: 'chart-analyser'
+							}
+						}
+					};
+
+					if (typeof(myRadarChart[x]) != "undefined") {
+						myRadarChart[x].destroy();
+					}
+
+					myRadarChart[x] = new Chart(context, {
+						type: 'bar',
+						data: data,
+						options: options
+					});
+				}
+				function graph_bar_filtre(x, context, donnees, titre) {
+					donnees.min = [4];
+					var s_bo = $("#selectBo").val();
+
+					var maille_supp = ' PCH ';
+					if(s_bo != ''){
+						maille_supp = ' du pôle ';
+					}
+
+					var data = {
+						labels: donnees.labs,
+						datasets: [
+							{
+								label: "Niveau AIE en " + anneeEnCours,
+								backgroundColor: coul_niv,
+								borderColor: coul_niv,
+								data: donnees.niveau
+							},{
+								label: "Niveau" + maille_supp + "en " + anneeEnCours,
+								backgroundColor: coul_bo,
+								borderColor: coul_bo,
+								data: donnees.maille_supp
+							}, 
+							{
+								label: "Attendu " + annee_nPlusUn,
+								backgroundColor: coul_n_plus_un,
+								borderColor: coul_n_plus_un,
+								data: donnees.nPlusUn
+							}, {
+								label: "Attendu " + annee_nPlusDeux,
+								backgroundColor: coul_n_plus_deux,
+								borderColor: coul_n_plus_deux,
+								data: donnees.nPlusDeux
+							}, {
+								label: "Attendu " + annee_nPlusTrois,
+								backgroundColor: coul_n_plus_trois,
+								borderColor: coul_n_plus_trois,
+								data: donnees.nPlusTrois
+							},{
+								label: "",
+								backgroundColor: 'rgba(0, 0, 0, 0)',
+								borderColor: 'rgba(0, 0, 0, 0)',
+								data: donnees.min
+							}
+						]
+					};
+					var options = {
+						title: {
+							display: true,
+							text: titre,
+							fontSize: 20
+						},
+						scale: {
+							ticks: {
+								beginAtZero: true
+							}
+						},
+						scales: {
+							xAxes: [
+								{
+									stacked: false,
+									ticks: 
+									{
+										min: 0,
+										max: 4
+									}
+								}
+							],
+							yAxes: [
+								{
+									stacked: false,
+									ticks: 
+									{
+										min: 0,
+										max: 4
+									}
+								}
+							]
+						},
+						maintainAspectRatio: true,
+						spanGaps: false,
+						elements: {
+							line: {
+								tension: 0.000001
+							}
+						},
+						plugins: {
+							filler: {
+								propagate: false
+							},
+							'samples-filler-analyser': {
+								target: 'chart-analyser'
+							}
+						}
+					};
+
+					if (typeof(myRadarChart[x]) != "undefined") {
+						myRadarChart[x].destroy();
+					}
+
+					myRadarChart[x] = new Chart(context, {
+						type: 'bar',
+						data: data,
+						options: options
+					});
+				}
+			</script>
+		</div>
+	</div>
+{% endblock %}

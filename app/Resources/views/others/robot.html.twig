@@ -1,0 +1,29 @@
+{% extends 'others/layout.html.twig' %}
+
+{% block content %}
+	<style>
+		li{
+			margin-bottom: 15px;
+		}
+	</style>
+	<div class="container" style="margin-bottom: 112px; ">
+		<h3 class="center-align">Conception et développement de robots informatiques</h3>
+		<ul class="sites">
+			<h6 style="font-weight: 501; ">Les robots informatiques simulent les actions des utilisateurs, 
+			j'utilise depuis 2 ans le langage AutoIt pour les développer. Voici les principaux types de robots que j'ai réalisés:</h6>
+			<li>Importation des données depuis une application nationale (téléchargement d'un fichier Excel + macro de mise en forme) 
+			vers un site web régional.</li>
+			<li>Modification en masse des informations d'une application à partir d'un fichier Excel où chaque ligne représente une
+			fiche dans l'application (le robot ouvre, modifie et sauvegarde chaque fiche).</li>
+			<li>Production de fiches à destination des agents à partir d'un publipostage Word-Excel.</li>
+			<li>Production d'un tableau croisé dynamique (robot + macro) Excel présentant les activités des agents sur les 12 semaines à venir.</li>
+			<li>Production d'une carte Google localisant les agents à partir d'un fichier Excel téléchargé par le robot .</li>
+		</ul>
+	</div>
+
+	<script>
+		$('document').ready(function(){
+			
+		});
+	</script>
+{% endblock %}

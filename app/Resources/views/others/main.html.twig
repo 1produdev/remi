@@ -1,0 +1,152 @@
+{% extends 'others/layout.html.twig' %}
+
+{% block content %}
+	<style>
+		.fontlarge{
+			color: red;
+		}
+		#text_title{
+			font-weight: 500;
+			color: rgb(47, 36, 30);
+			font-size: 19px;
+		}
+		#the_tags{
+			font-weight: 700;
+			list-style-type: circle;
+		}
+		#text_body{
+			font-size: 17px;
+			color: rgb(43 ,36, 30):
+			text-align: justify;
+			padding-left: 10px;
+		}
+		.ligne_subtitle{
+			height: 10px;
+			border: 0;
+			box-shadow: 0 10px 10px -10px #8c8b8b inset;
+		}
+		#tagcloud{
+			margin-top: 30px;
+			border-radius: 100%;
+			background-color: rgb(232, 248, 255);
+		}
+		.bt_tag{
+			border:1px solid #2eb9ce;
+			margin: 2px;
+			text-align: center;
+		}
+		.bt_tag :hover{
+			cursor: default;
+		}
+		@media only screen and (max-height:567px) {
+			 #bottom_tags{
+				 display: none;
+			 }
+		}
+		@media only screen and (max-width:912px) {
+			 #img {
+				 display: none;
+			 }
+		}
+		@media only screen and (max-width:653px) {
+			 #bottom_tags {
+				 display: none;
+			 }
+		}
+		</style>
+	<div id="txt_n_tag" class="row">
+		<div id="text_tag" class="col s5 z-depth-3 zoomIn" style="z-index: 1; opacity: 1; ">
+			<h5 id="text_title"><ul style="list-style-type: none; "><li>Développeur web PHP Full stack depuis plus de 2 ans...</li>
+			<li>Ce site présente les compétences que j'ai acquises, mon parcours professionnel et les projets que j'ai réalisés.</li></ul></h5>
+			<hr class="ligne_subtitle" />
+			<h6 id="text_body" class="justify "></h6>
+		</div>
+		<div class="col s3 offset-s1">
+			<div id="tagcloud" class="left">
+				<ul id="the_tags">
+					<li><a class="" href="#">PHP</a></li>
+					<li><a class="" href="#">VBA</a></li>
+					<li><a class="" href="#">MVC</a></li>
+					<li><a class="" href="#">GITLAB</a></li>
+					<li><a class="" href="#">UML</a></li>
+					<li><a class="" href="#">Javascript</a></li>
+					<li><a class="" href="#">CSS</a></li>
+					<li><a class="" href="#">HTML</a></li>
+					<li><a class="" href="#">POO</a></li>
+					<li><a class="" href="#">Symfony</a></li>
+					<li><a class="" href="#">Jquery</a></li>
+					<li><a class="" href="#">Bootstrap</a></li>
+					<li><a class="" href="#">Materialize</a></li>
+					<li><a class="" href="#">Linux</a></li>
+					<li><a class="" href="#">API</a></li>
+					<li><a class="" href="#">BDD</a></li>
+					<li><a class="" href="#">Robots</a></li>
+					<li><a class="" href="#">AJAX</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col s2 offset-s1" style="margin-top: 30px; ">
+			<img class="" width="144" min-width="144" max-width="200" id="img" src="" alt="">
+		</div>
+	</div>
+	<div class="row">
+		<!-- Tap Target Structure -->
+		  <div class="tap-target" data-target="menu">
+			<div class="tap-target-content">
+			  <h5 style="margin-left: 10px; ">Rémi Tafforeau - Développeur web</h5>
+			  <li style="list-style-type: none; margin-left: 10px; "><a class="tooltipped"  data-position="top" data-tooltip="Cliquer pour m'envoyer un mail..." href="mailto:remitafforeau@yahoo.fr" style="color: rgb(43, 36, 30)"> <i style="vertical-align: bottom; margin-right: 3px; " class="material-icons">mail</i><u>remitafforeau@yahoo.fr</u></a></li>
+			  <li style="list-style-type: none; margin-left: 10px; "><span style="color: rgb(43, 36, 30)"> <i style="vertical-align: bottom; margin-right: 3px; " class="material-icons">phone</i>06.62.61.21.19.</span></li>
+			</div>
+		  </div>
+	</div>
+	<div class="container" style="width: 75%; ">
+		<ul id="bottom_tags" class="row" style="position: fixed; bottom: 0; ">
+			<li class="col l1 s2 bt_tag hoverable"><a>AJAX</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>API</a></li> 
+			<li class="col l1 s2 bt_tag hoverable"><a>Robots</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>BDD</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Bootstrap</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>CSS</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Javascript</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Jquery</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>GITLAB</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>HTML</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Materialize</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>MVC</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Linux</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>PHP</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>POO</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>Symfony</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>UML</a></li>
+			<li class="col l1 s2 bt_tag hoverable"><a>VBA</a></li>
+		  </ul>
+		   <div class="row" style="position: fixed; bottom: 0px; right: 0">
+			<img src="/img_rt" class="circle" width="30px" onmouseover="$('.tap-target').tapTarget('open')">
+		</div>
+		  <div class="row" style="position: fixed; bottom: 0; right: 40px; width: 0;  ">
+			<a style="background-color: rgb(249, 254, 255); border: 0px white solid; width: 0; " id="menu" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a>
+		</div>
+	</div>
+	<script src="/js_tagcloud"></script>
+	<script src="/js_script"></script>
+	<script>
+		 $(document).ready(function(){
+			$('.tap-target').tapTarget();
+		});
+		$("#envoiMail").click(function(){
+			$path  = "{{path('mail')}}";
+			
+			$.post($path, {
+				objet: 'MAIL',
+			}, 
+			function (data_json) {
+				alert('essai effectué !');
+			});
+		});
+	</script>
+{% endblock %}
+
+
+
+
+

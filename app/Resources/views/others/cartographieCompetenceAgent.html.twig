@@ -1,0 +1,440 @@
+{% extends 'AppBundle:Default:menu.html.twig' %}
+{% block body %}
+    <div style="padding: 10px; ">
+        <div>
+            <br/>
+            <div class="input-field col s12">
+                <select id="selectPole" onchange="sort_by_all_filters(this)">
+                    <option value="" selected="selected">Tous</option>
+                    {% for pole in poles %}
+                        <option value="{{ pole.pole }}">{{ pole.pole }}</option>
+                    {% endfor %}
+                </select>
+                <label>Filtre : Pôle
+                </label>
+            </div>
+            <div class="input-field col s12">
+                <select id="selectBo" onchange="sort_by_all_filters()">
+                    <option value="" selected="selected">Toutes</option>
+                    {% for bo in bos %}
+                        <option value="{{ bo.nom }}" label="{{ bo.pole }}">{{ bo.nom }}</option>
+                    {% endfor %}
+                </select>
+                <label>Filtre : BO
+                </label>
+            </div>
+            <div class="input-field col s12">
+                <select id="selectProfil" onchange="sort_by_all_filters()">
+                    <option value="" selected="selected">Tous</option>
+                    <option value="MPRO">MPRO</option>
+                    <option value="TE">TE</option>
+                    <option value="RIP">RIP</option>
+                    <option value="CDC">CDC</option>
+                    <option value="TIP">TIP</option>
+                </select>
+                <label>Filtre : Profil
+                </label>
+            </div>
+            <div class="input-field col s12">
+                <select id="selectAstreinte" onchange="sort_by_all_filters()">
+                    <option value="" selected="selected">Tous</option>
+                    <option value="oui">oui</option>
+                    <option value="non">non</option>
+                </select>
+                <label>Filtre : Astreinte
+                </label>
+            </div>
+            <div class="input-field col s12">
+                <select id="selectEcart" onchange="sort_by_all_filters()">
+                    <option value="" selected="selected">Tous</option>
+                    <option value="oui">oui</option>
+                    <option value="non">non</option>
+                </select>
+                <label>Filtre : Ecart
+                </label>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" id="autocomplete-input" class="autocomplete" onkeyup="sort_by_all_filters()">
+                            <label for="autocomplete-input">Filtre : Nom</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table id="tableau">
+                <thead>
+                    <tr>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Pôle</th>
+                        <th>BO</th>
+                        <th>Profil</th>
+                        <th>Astreinte</th>
+                        <th>Date retraite</th>
+                        <th>Date mobilité</th>
+                        <th>Confirmation départ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agent in agents %}
+                        <tr class="tr_tab_agents" id="{{ agent.nni }}">
+                            <td>{{ agent.prenom }}</td>
+                            <td>{{ agent.nom }}</td>
+                            <td>{{ agent.equipe.bo.pole }}</td>
+                            <td>{{ agent.equipe.bo.nom }}</td>
+                            <td class="profil_td">
+                                <select id="{{ agent.id }}_profil" class="profil_select">
+                                    {% if agent.profil == "" %}
+                                        <option id="{{ agent.id }}_aucun" value="" selected="selected">{{ agent.profil }}</option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP">TIP</option>
+                                    {% elseif agent.profil == "MPRO" %}
+                                        <option id="{{ agent.id }}_aucun" value=""></option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO" selected="selected">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP">TIP</option>
+                                    {% elseif agent.profil == "TE" %}
+                                        <option id="{{ agent.id }}_aucun" value=""></option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE" selected="selected">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP">TIP</option>
+                                    {% elseif agent.profil == "RIP" %}
+                                        <option id="{{ agent.id }}_aucun" value=""></option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP" selected="selected">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP">TIP</option>
+                                    {% elseif agent.profil == "CDC" %}
+                                        <option id="{{ agent.id }}_aucun" value=""></option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC" selected="selected">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP">TIP</option>
+                                    {% elseif agent.profil == "TIP" %}
+                                        <option id="{{ agent.id }}_aucun" value=""></option>
+                                        <option id="{{ agent.id }}_MPRO" value="MPRO">MPRO</option>
+                                        <option id="{{ agent.id }}_TE" value="TE">TE</option>
+                                        <option id="{{ agent.id }}_RIP" value="RIP">RIP</option>
+                                        <option id="{{ agent.id }}_CDC" value="CDC">CDC</option>
+                                        <option id="{{ agent.id }}_TIP" value="TIP" selected="selected">TIP</option>
+                                    {% endif %}
+                                </select>
+                            </td>
+                            <td>
+                                <select id="{{ agent.id }}_abstreinte" class="astreinte_select">
+                                    {% if agent.abstreinte == "" %}
+                                        <option id="{{ agent.id }}_nioui_ninon" value="" selected="selected"></option>
+                                        <option id="{{ agent.id }}_oui" value="oui">oui</option>
+                                        <option id="{{ agent.id }}_non" value="non">non</option>
+                                    {% elseif agent.abstreinte == "oui" %}
+                                        <option id="{{ agent.id }}_nioui_ninon" value=""></option>
+                                        <option id="{{ agent.id }}_oui" value="oui" selected="selected">oui</option>
+                                        <option id="{{ agent.id }}_non" value="non">non</option>
+                                    {% elseif agent.abstreinte == "non" %}
+                                        <option id="{{ agent.id }}_nioui_ninon" value=""></option>
+                                        <option id="{{ agent.id }}_oui" value="oui">oui</option>
+                                        <option id="{{ agent.id }}_non" value="non" selected="selected">non</option>
+                                    {% endif %}
+                                </select>
+                            </td>
+                            <td><input type="text" id="{{ agent.id }}_retraite" class="retraite" value={% if agent.retraite != "" %} {{ agent.retraite|date("d/m/Y")  }} {% endif %}></td>
+                            <td><input type="text" id="{{ agent.id }}_mobility" class="retraite" value={% if agent.mobilite != "" %} {{ agent.mobilite|date("d/m/Y")  }} {% endif %}></td>
+                            <td>
+                                <select id="{{ agent.id }}_parti" class="parti_select">
+                                    {% if agent.parti == "" %}
+                                        <option id="{{ agent.id }}_nioui_ninon_parti" value="" selected="selected"></option>
+                                        <option id="{{ agent.id }}_oui_parti" value="oui">oui</option>
+                                        <option id="{{ agent.id }}_non_parti" value="non">non</option>
+                                    {% elseif agent.parti == "oui" %}
+                                        <option id="{{ agent.id }}_nioui_ninon_parti" value=""></option>
+                                        <option id="{{ agent.id }}_oui_parti" value="oui" selected="selected">oui</option>
+                                        <option id="{{ agent.id }}_non_parti" value="non">non</option>
+                                    {% elseif agent.parti == "non" %}
+                                        <option id="{{ agent.id }}_nioui_ninon_parti" value=""></option>
+                                        <option id="{{ agent.id }}_oui_parti" value="oui">oui</option>
+                                        <option id="{{ agent.id }}_non_parti" value="non" selected="selected">non</option>
+                                    {% endif %}
+                                </select>
+                            </td>
+                            <td>
+                                <a href="#" onclick="goAgent('{{ agent.id }}', '{{ agent.profil }}', '{{ agent.abstreinte }}', '{{ agent.nom }}', '{{ agent.prenom }}'); ">
+                                    <i class="material-icons">search</i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        var nnis = [];
+        {% for ag in agents_in_ecart %}
+            nnis.push("{{ ag.nni }}");
+        {% endfor %}
+
+        var noms = [];
+
+        ////REDIRIGE VERS LA PAGE DE L'AGENT
+        function goAgent(ag_id, ag_profil, ag_astreinte, ag_nom, ag_prenom){
+            var profil_id = ag_id + '_profil';
+            var astreinte_id = ag_id + '_abstreinte';
+            
+            var profil = $("#" + profil_id).val();
+            var astreinte = $("#" + astreinte_id).val();
+            
+            if(profil != "" && profil != "MPRO" && astreinte != ""){
+                document.location.href = "/GPEC-AIE/web/graphCartographieCompetenceAgent/" + ag_id;
+            }
+            else if(profil == "MPRO"){
+                alert("Les profils MPRO ne sont pas détaillés ici.");
+            }
+            else if(profil == "" || astreinte == ""){
+                alert("Les champs \"Profil\" et \"Astreinte\" doivent êre renseignés.");
+            }
+        }
+        ///////CHARGEMENT PAGE///////////////////////////////////////////////////////////////
+        $('document').ready(function () {
+            $(function () {
+                $(".retraite").datepicker({
+                    altField: ".retraite",
+                    closeText: 'Fermer',
+                    prevText: 'Précédent',
+                    nextText: 'Suivant',
+                    currentText: 'Aujourd\'hui',
+                    monthNames: [
+                        'Janvier',
+                        'Février',
+                        'Mars',
+                        'Avril',
+                        'Mai',
+                        'Juin',
+                        'Juillet',
+                        'Août',
+                        'Septembre',
+                        'Octobre',
+                        'Novembre',
+                        'Décembre'
+                    ],
+                    monthNamesShort: [
+                        'Janv.',
+                        'Févr.',
+                        'Mars',
+                        'Avril',
+                        'Mai',
+                        'Juin',
+                        'Juil.',
+                        'Août',
+                        'Sept.',
+                        'Oct.',
+                        'Nov.',
+                        'Déc.'
+                    ],
+                    dayNames: [
+                        'Dimanche',
+                        'Lundi',
+                        'Mardi',
+                        'Mercredi',
+                        'Jeudi',
+                        'Vendredi',
+                        'Samedi'
+                    ],
+                    dayNamesShort: [
+                        'Dim.',
+                        'Lun.',
+                        'Mar.',
+                        'Mer.',
+                        'Jeu.',
+                        'Ven.',
+                        'Sam.'
+                    ],
+                    dayNamesMin: [
+                        'D',
+                        'L',
+                        'M',
+                        'M',
+                        'J',
+                        'V',
+                        'S'
+                    ],
+                    weekHeader: 'Sem.',
+                    dateFormat: 'yy-mm-dd'
+                });
+            });
+            var x = 1;
+            $('tr').each(function () {
+                noms.push({id: x, text:$(this).children().first().text()});
+                x++;
+            });
+            noms.sort();
+            $('input.autocomplete').autocomplete({
+                data: noms
+            });
+
+        });
+        /////////////////////SAUVEGARDE EN BASE LES NOUVELLES VALEURS APRES MODIFICATION DE LA TABLE////////////////////////////////////////////////
+        $("table").change(function (e) {
+            var val_id = e.target.id;
+            var valeur = $("#" + val_id).val();
+
+            var type = val_id.substr(val_id.length - 3, 3);
+
+            if (type == "fil") {
+                val_col_type = "profil";
+                var val_agent_id = val_id.substr(0, val_id.length - 7);
+            } else if (type == "nte") {
+                val_col_type = "abstreinte";
+                var val_agent_id = val_id.substr(0, val_id.length - 11);
+            } else if (type == "ite") {
+                val_col_type = "retraite";
+                var val_agent_id = val_id.substr(0, val_id.length - 9);
+            } else if (type == "ity") {
+                val_col_type = "mobilite";
+                var val_agent_id = val_id.substr(0, val_id.length - 9);
+            } else if (type == "rti") {
+                val_col_type = "parti";
+                var val_agent_id = val_id.substr(0, val_id.length - 6);
+            }
+
+            if (val_col_type == 'retraite') {
+                change_val_table(val_id, valeur, val_agent_id, val_col_type);
+                change_val_table(val_id, "", val_agent_id, "mobilite");
+
+                var val_id_ret = val_id.replace('retraite', 'mobility');
+
+                $("#" + val_id_ret).val("");
+                $("#" + val_id_ret).text("");
+            } else if (val_col_type == 'mobilite') {
+                change_val_table(val_id, valeur, val_agent_id, val_col_type);
+                change_val_table(val_id, "", val_agent_id, "retraite");
+
+                var val_id_ret = val_id.replace('mobility', 'retraite');
+
+                $("#" + val_id_ret).val("");
+                $("#" + val_id_ret).text("");
+            } else {
+                change_val_table(val_id, valeur, val_agent_id, val_col_type);
+            }
+
+        });
+        /////////////////////ENVOI AU SERVEUR LES NOUVELLES VALEURS A SAUVEGARDER EN BASE APRES MODIFICATION DE LA TABLE////////////////////////////////////////////////
+        function change_val_table(identifiant, new_valeur, id_ag, type_col) {
+            $.post("{{path('carto_json')}}", {
+                objet: 'UPDATE_UO_AGENT',
+                id: identifiant,
+                val: new_valeur,
+                agent_id: id_ag,
+                col_type: type_col
+            }, function (data_json) {});
+        }
+        /////////////////////FILTRE SUR TOUTES LES VALEURS DES FILTRES////////////////////////////////////////////////
+        function sort_by_all_filters(pole) {
+            var s_pole = $("#selectPole").val();
+            var s_bo = $("#selectBo").val();
+            var s_profil = $("#selectProfil").val();
+            var s_astreinte = $("#selectAstreinte").val();
+            var s_ecart = $("#selectEcart").val();
+            var s_nom = $("#autocomplete-input").val();
+
+            var table = document.getElementById("tableau");
+            var tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                var td_nom = tr[i].getElementsByTagName("td")[1].innerText;
+
+                var td_pole = tr[i].getElementsByTagName("td")[2].innerText;
+                var td_bo = tr[i].getElementsByTagName("td")[3].innerText;
+                var td_profil = tr[i].getElementsByClassName('profil_select')[0].value;
+                var td_astreinte = tr[i].getElementsByClassName('astreinte_select')[0].value;
+                var nni = tr[i].id;
+                var td_ecart = "";
+
+                if (s_pole == "") {
+                    td_pole = "";
+                }
+                if (s_bo == "" || typeof(pole) != "undefined") {
+                    td_bo = "";
+                    s_bo = "";
+                }
+                if (s_profil == "") {
+                    td_profil = "";
+                }
+                if (s_astreinte == "") {
+                    td_astreinte = "";
+                }
+                if (s_ecart == "") {
+                    td_ecart = "";
+                }
+                else{
+                    if(nnis.indexOf(nni) != -1){
+                        if(s_ecart == 'oui'){
+                            td_ecart = 'oui';
+                        }
+                    }
+                    else{
+                        if(s_ecart == 'non'){
+                            td_ecart = 'non';
+                        }
+                    }
+                }
+
+                if (s_nom == "") {
+                    if (s_pole == td_pole && s_bo == td_bo && s_profil == td_profil && s_astreinte == td_astreinte && s_ecart == td_ecart) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                } else {
+                    var re = new RegExp(s_nom, 'gi');
+                    var arr = td_nom.search(re);
+
+                    if (arr != -1 && s_pole == td_pole && s_bo == td_bo && s_profil == td_profil && s_astreinte == td_astreinte && s_ecart == td_ecart) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+            if (pole) {
+                var pole_select = pole.value;
+                $('#selectBo').empty();
+                $('#selectBo').formSelect();
+                $('#selectBo').append("<option value='' selected='selected'>Toutes</option>");
+
+                {% for polebo in poles_bos %}
+                    var pole_var = "{{ polebo.pole }}";
+                    var bo_var = "{{ polebo.bo }}";
+
+                    pole_var = pole_var.replace(/&amp;/g, '&');
+
+                    if (pole_var == pole_select) {
+                        $("#selectBo").append("<option value='" + bo_var + "'>" + bo_var + "</option>");
+                    }
+                    else if(pole_select == ""){
+                        $("#selectBo").append("<option value='" + bo_var + "'>" + bo_var + "</option>");    
+                    }
+                {% endfor %}
+                $('#selectBo').formSelect();
+            }
+
+        }
+    </script>
+
+{% endblock %}

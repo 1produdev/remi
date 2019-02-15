@@ -1,0 +1,39 @@
+{% extends 'others/layout.html.twig' %}
+
+{% block content %}
+	<style>
+		p{
+			font-size: 42px;
+		}
+	</style>
+	<div class="container">
+		<h3 class="center-align">Compétences</h3>
+		<ul class="collapsible">
+			<li>
+				  <div class="collapsible-header"><i class="material-icons">filter_drama</i>Réseau</div>
+				  <div class="collapsible-body">
+					<span>Lorem ipsum dolor sit amet.</span>
+					<img src="https://drive.google.com/uc?id=0B9SUymTdIG6WZjFZYTMxWjJVZzg" alt="test image" width="400" height="341">
+				  </div>
+			</li>
+			<li>
+				  <div class="collapsible-header"><i class="material-icons">developer_mode</i>Développement web</div>
+				  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			</li>
+			<li>
+				  <div class="collapsible-header"><i class="material-icons">equalizer</i>Macros VBA</div>
+				  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			</li>
+			<li>
+				  <div class="collapsible-header"><i class="material-icons">repeat</i>Robots AutoIt</div>
+				  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		$('document').ready(function(){
+			$('.collapsible').collapsible();
+		});
+	</script>
+{% endblock %}

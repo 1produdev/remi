@@ -1,0 +1,42 @@
+{# app/Resources/views/others/layout.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<style>
+		#barup{
+			background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%);
+			padding-left: 5px;
+		}
+		.navbar_title{
+			font-size: 28px;
+		}
+	</style>
+    <ul id="dropdown1" class="dropdown-content">
+	  <li><a href="/sites" style="color: rgb(47, 36, 30); ">SITES</a></li>
+	  <li class="divider"></li>
+	  <li><a href="/macro" style="color: rgb(47, 36, 30);">MACROS</a></li>
+	  <li class="divider"></li>
+	  <li><a href="/robot" style="color: rgb(47, 36, 30); ">ROBOTS</a></li>
+	</ul>
+	<div class="navbar-fixed">
+		<nav>
+			  <div id="barup" class="nav-wrapper" style="color:rgb(249, 254, 255); ">
+				<a href="/" class="navbar_title"  style="color:rgb(249, 254, 255); ">Rémi Tafforeau</a>
+				<a href="/cv" class="right waves-effect waves-light btn-small" style="color:rgb(249, 254, 255); ">CV<i class="tiny material-icons">gps_fixed</i></a>
+				<ul class="right">
+				<li><a href="/parcours" style="color:rgb(249, 254, 255); ">PARCOURS</a></li>
+				  <!-- Dropdown Trigger -->
+				  <li><a class="dropdown-trigger" href="#!" data-target="dropdown1" style="color:rgb(249, 254, 255); ">RÉALISATIONS<i class="material-icons right">arrow_drop_down</i></a></li>
+				</ul>
+			  </div>
+		</nav>
+	</div>
+	<script>
+		$('document').ready(function(){
+			$(".dropdown-trigger").dropdown();
+		});
+	</script>
+
+    {% block content %}{% endblock %}
+    {% block gpec %}{% endblock %}
+{% endblock %}
